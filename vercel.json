@@ -4,13 +4,125 @@
   "cleanUrls": true,
   "trailingSlash": true,
   "redirects": [
-    { "source": "/shop/:path*", "destination": "/", "permanent": true },
-    { "source": "/product/:path*", "destination": "/", "permanent": true },
-    { "source": "/product-category/:path*", "destination": "/", "permanent": true },
-    { "source": "/cart/:path*", "destination": "/", "permanent": true },
-    { "source": "/checkout/:path*", "destination": "/", "permanent": true },
-    { "source": "/my-account/:path*", "destination": "/", "permanent": true },
-    { "source": "/wp-admin/:path*", "destination": "/", "permanent": false },
-    { "source": "/wp-login.php", "destination": "/", "permanent": false }
+    {
+      "source": "/shop/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/product/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/cart/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/checkout/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/my-account/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-admin/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/wp-login.php",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/ai-studio/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/ai-studio",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/home/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/about/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/about-us/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/services/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/portfolio/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/category/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/tag/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/author/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/feed/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/wp-content/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/wp-json/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/contact/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/contact-us/:path*",
+      "destination": "/",
+      "permanent": false
+    }
   ]
 }
