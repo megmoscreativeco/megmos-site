@@ -124,5 +124,6 @@
       "destination": "/",
       "permanent": false
     }
-  ]
+  ],
+  "buildCommand": "node scripts/build.mjs"
 }
