@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/shop/:path*", "destination": "/", "permanent": true },
+    { "source": "/product/:path*", "destination": "/", "permanent": true },
+    { "source": "/product-category/:path*", "destination": "/", "permanent": true },
+    { "source": "/cart/:path*", "destination": "/", "permanent": true },
+    { "source": "/checkout/:path*", "destination": "/", "permanent": true },
+    { "source": "/my-account/:path*", "destination": "/", "permanent": true },
+    { "source": "/wp-admin/:path*", "destination": "/", "permanent": false },
+    { "source": "/wp-login.php", "destination": "/", "permanent": false }
+  ]
+}
