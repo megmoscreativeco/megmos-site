@@ -2,6 +2,7 @@
 // Copy lives in scripts/content.mjs; styles in public/styles.css; behaviour in public/site.js.
 import { writeFileSync, mkdirSync } from "node:fs";
 import { en, ar, APP, SITE } from "./content.mjs";
+import { legal, LEGAL_UPDATED } from "./legal.mjs";
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const br = (s) => esc(s).replace(/\n/g, "<br>");
@@ -118,6 +119,100 @@ function demoPanels(t) {
       <div class="app-main">${outputCard(t)}</div>
     </div>`;
   return [panel1, panel2, panel3];
+}
+
+
+/* ---------- shared footer ---------- */
+function footerHtml(t) {
+  const otherLang = t.lang === "en" ? "ar" : "en";
+  const L = legal[t.lang];
+  const base = t.lang === "ar" ? "/ar/" : "/";
+  return `<footer class="site-footer">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="${t.path}"><img src="/logo.png" alt="" width="36" height="36"><span class="brand-text"><b>MABS</b><small>${esc(t.brandSub)}</small></span></a>
+      <p>${esc(t.footer.desc)}</p>
+    </div>
+    <nav aria-label="${esc(t.footer.navLabel)}" class="foot-cols">
+      <div><h3>${esc(t.footer.navTitle)}</h3><a href="${t.path}#product">${esc(t.nav.product)}</a><a href="${t.path}#features">${esc(t.nav.features)}</a><a href="${t.path}#how">${esc(t.nav.how)}</a><a href="${t.path}#faq">${esc(t.nav.faq)}</a></div>
+      <div><h3>${esc(t.footer.accountTitle)}</h3><a href="${LOGIN}">${esc(t.nav.login)}</a><a href="${SIGNUP}">${esc(t.nav.start)}</a><a href="${APP}/support">${esc(t.footer.support)}</a></div>
+      <div><h3>${esc(L.labels.legal)}</h3><a href="${base}privacy/">${esc(L.privacy.title)}</a><a href="${base}terms/">${esc(L.terms.title)}</a><a href="${base}cookies/">${esc(L.cookies.title)}</a></div>
+      <div><h3>${esc(t.footer.companyTitle)}</h3><span>${esc(t.footer.company)}</span><a href="${t.other}" hreflang="${otherLang}" lang="${otherLang}">${esc(t.otherLabel)}</a></div>
+    </nav>
+  </div>
+  <div class="wrap foot-base"><span dir="ltr">© ${new Date().getFullYear()} Megmos LLC · Megmos Creative Co.</span></div>
+</footer>`;
+}
+
+/* ---------- legal pages ---------- */
+const inline = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+function legalBody(blocks) {
+  return blocks.map(([type, a, b]) => {
+    if (type === "h2") return `<h2>${inline(a)}</h2>`;
+    if (type === "p") return `<p>${inline(a)}</p>`;
+    if (type === "ul") return `<ul>${a.map((li) => `<li>${inline(li)}</li>`).join("")}</ul>`;
+    if (type === "table") return `<div class="table-wrap"><table><thead><tr>${a.map((h) => `<th scope="col">${inline(h)}</th>`).join("")}</tr></thead><tbody>${b.map((r) => `<tr>${r.map((c) => `<td>${inline(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+    return "";
+  }).join("\n      ");
+}
+
+function legalPage(t, key) {
+  const L = legal[t.lang];
+  const doc = L[key];
+  const otherLang = t.lang === "en" ? "ar" : "en";
+  const enPath = `/${doc.slug}/`, arPath = `/ar/${doc.slug}/`;
+  const self = t.lang === "en" ? enPath : arPath;
+  const other = t.lang === "en" ? arPath : enPath;
+  const others = ["privacy", "terms", "cookies"].filter((k) => k !== key);
+  return `<!doctype html>
+<html lang="${t.lang}" dir="${t.dir}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(doc.title)} | MABS</title>
+<meta name="description" content="${esc(doc.desc)}">
+<link rel="canonical" href="${SITE}${self}">
+<link rel="alternate" hreflang="en" href="${SITE}${enPath}">
+<link rel="alternate" hreflang="ar" href="${SITE}${arPath}">
+<link rel="alternate" hreflang="x-default" href="${SITE}${enPath}">
+<meta name="theme-color" content="#f8f8f8">
+<link rel="icon" href="/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">${esc(t.skip)}</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="${t.path}" aria-label="MABS · ${esc(t.brandSub)}">
+      <img src="/logo.png" alt="" width="40" height="40">
+      <span class="brand-text"><b>MABS</b><small>${esc(t.brandSub)}</small></span>
+    </a>
+    <div class="bar-actions">
+      <a class="lang" href="${other}" hreflang="${otherLang}" lang="${otherLang}" aria-label="${esc(t.otherAria)}">${icon("globe", 16)}<span>${esc(t.otherLabel)}</span></a>
+      <a class="btn btn-primary btn-sm legal-cta" href="${SIGNUP}">${esc(t.nav.start)}</a>
+    </div>
+  </div>
+</header>
+<main id="main" class="legal">
+  <div class="wrap legal-wrap">
+    <a class="text-link back" href="${t.path}">${icon("arrow", 16, "back-ic")} ${esc(L.labels.back)}</a>
+    <p class="eyebrow">${esc(L.labels.legal)}</p>
+    <h1>${esc(doc.title)}</h1>
+    <p class="legal-date">${esc(L.labels.updated)}: ${esc(LEGAL_UPDATED[t.lang])}</p>
+    ${L.labels.prevails ? `<p class="legal-note">${esc(L.labels.prevails)}</p>` : ""}
+    <article class="legal-body">
+      ${legalBody(doc.blocks)}
+    </article>
+    <nav class="legal-more" aria-label="${esc(L.labels.legal)}">${others.map((k) => `<a href="${t.lang === "ar" ? "/ar/" : "/"}${L[k].slug}/">${esc(L[k].title)}</a>`).join("")}</nav>
+  </div>
+</main>
+${footerHtml(t)}
+</body>
+</html>
+`;
 }
 
 /* ---------- page ---------- */
@@ -377,20 +472,7 @@ function page(t) {
 </main>
 
 <!-- 13. Footer -->
-<footer class="site-footer">
-  <div class="wrap foot-grid">
-    <div class="foot-brand">
-      <a class="brand" href="${t.path}"><img src="/logo.png" alt="" width="36" height="36"><span class="brand-text"><b>MABS</b><small>${esc(t.brandSub)}</small></span></a>
-      <p>${esc(t.footer.desc)}</p>
-    </div>
-    <nav aria-label="${esc(t.footer.navLabel)}" class="foot-cols">
-      <div><h3>${esc(t.footer.navTitle)}</h3><a href="#product">${esc(t.nav.product)}</a><a href="#features">${esc(t.nav.features)}</a><a href="#how">${esc(t.nav.how)}</a><a href="#faq">${esc(t.nav.faq)}</a></div>
-      <div><h3>${esc(t.footer.accountTitle)}</h3><a href="${LOGIN}">${esc(t.nav.login)}</a><a href="${SIGNUP}">${esc(t.nav.start)}</a><a href="${APP}/support">${esc(t.footer.support)}</a></div>
-      <div><h3>${esc(t.footer.companyTitle)}</h3><span>${esc(t.footer.company)}</span><a href="${t.other}" hreflang="${otherLang}" lang="${otherLang}">${esc(t.otherLabel)}</a></div>
-    </nav>
-  </div>
-  <div class="wrap foot-base"><span dir="ltr">© ${new Date().getFullYear()} Megmos Creative Co.</span></div>
-</footer>
+${footerHtml(t)}
 <script src="/site.js" defer></script>
 </body>
 </html>
@@ -401,10 +483,18 @@ mkdirSync("public/ar", { recursive: true });
 writeFileSync("public/index.html", page(en));
 writeFileSync("public/ar/index.html", page(ar));
 writeFileSync("public/robots.txt", `User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`);
+for (const t of [en, ar]) {
+  for (const key of ["privacy", "terms", "cookies"]) {
+    const dir = `public${t.lang === "ar" ? "/ar" : ""}/${legal[t.lang][key].slug}`;
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(`${dir}/index.html`, legalPage(t, key));
+  }
+}
+const urls = ["/", "/privacy/", "/terms/", "/cookies/"];
 writeFileSync("public/sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url><loc>${SITE}/</loc><xhtml:link rel="alternate" hreflang="ar" href="${SITE}/ar/"/></url>
-  <url><loc>${SITE}/ar/</loc><xhtml:link rel="alternate" hreflang="en" href="${SITE}/"/></url>
+${urls.map((u) => `  <url><loc>${SITE}${u}</loc><xhtml:link rel="alternate" hreflang="ar" href="${SITE}/ar${u}"/></url>
+  <url><loc>${SITE}/ar${u}</loc><xhtml:link rel="alternate" hreflang="en" href="${SITE}${u}"/></url>`).join("\n")}
 </urlset>
 `);
-console.log("built public/index.html, public/ar/index.html");
+console.log("built home + legal pages (EN/AR)");
