@@ -3,6 +3,7 @@
 import { writeFileSync, mkdirSync } from "node:fs";
 import { en, ar, APP, SITE } from "./content.mjs";
 import { legal, LEGAL_UPDATED } from "./legal.mjs";
+import { pages, COMPANY } from "./pages.mjs";
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const br = (s) => esc(s).replace(/\n/g, "<br>");
@@ -137,7 +138,7 @@ function footerHtml(t) {
       <div><h3>${esc(t.footer.navTitle)}</h3><a href="${t.path}#product">${esc(t.nav.product)}</a><a href="${t.path}#features">${esc(t.nav.features)}</a><a href="${t.path}#how">${esc(t.nav.how)}</a><a href="${t.path}#faq">${esc(t.nav.faq)}</a></div>
       <div><h3>${esc(t.footer.accountTitle)}</h3><a href="${LOGIN}">${esc(t.nav.login)}</a><a href="${SIGNUP}">${esc(t.nav.start)}</a><a href="${APP}/support">${esc(t.footer.support)}</a></div>
       <div><h3>${esc(L.labels.legal)}</h3><a href="${base}privacy/">${esc(L.privacy.title)}</a><a href="${base}terms/">${esc(L.terms.title)}</a><a href="${base}cookies/">${esc(L.cookies.title)}</a></div>
-      <div><h3>${esc(t.footer.companyTitle)}</h3><span>${esc(t.footer.company)}</span><a href="${t.path}#contact">${esc(t.nav.contact)}</a><a href="mailto:support@megmos.com" dir="ltr">support@megmos.com</a><a href="${t.other}" hreflang="${otherLang}" lang="${otherLang}">${esc(t.otherLabel)}</a></div>
+      <div><h3>${esc(t.footer.companyTitle)}</h3><span>${esc(t.footer.company)}</span><a href="${base}about/">${esc(pages[t.lang].nav.about)}</a><a href="${base}contact/">${esc(t.nav.contact)}</a><a href="mailto:support@megmos.com" dir="ltr">support@megmos.com</a><a href="${t.other}" hreflang="${otherLang}" lang="${otherLang}">${esc(t.otherLabel)}</a></div>
     </nav>
   </div>
   <div class="wrap foot-base"><span dir="ltr">© ${new Date().getFullYear()} Megmos LLC · Megmos Creative Co.</span></div>
@@ -184,18 +185,7 @@ function legalPage(t, key) {
 </head>
 <body>
 <a class="skip" href="#main">${esc(t.skip)}</a>
-<header class="site-header">
-  <div class="wrap bar">
-    <a class="brand" href="${t.path}" aria-label="MABS · ${esc(t.brandSub)}">
-      <img src="/logo.png" alt="" width="40" height="40">
-      <span class="brand-text"><b>MABS</b><small>${esc(t.brandSub)}</small></span>
-    </a>
-    <div class="bar-actions">
-      <a class="lang" href="${other}" hreflang="${otherLang}" lang="${otherLang}" aria-label="${esc(t.otherAria)}">${icon("globe", 16)}<span>${esc(t.otherLabel)}</span></a>
-      <a class="btn btn-primary btn-sm legal-cta" href="${SIGNUP}">${esc(t.nav.start)}</a>
-    </div>
-  </div>
-</header>
+${headerHtml(t, other)}
 <main id="main" class="legal">
   <div class="wrap legal-wrap">
     <a class="text-link back" href="${t.path}">${icon("arrow", 16, "back-ic")} ${esc(L.labels.back)}</a>
@@ -210,6 +200,205 @@ function legalPage(t, key) {
   </div>
 </main>
 ${footerHtml(t)}
+<script src="/site.js" defer></script>
+</body>
+</html>
+`;
+}
+
+/* ---------- shared header (home, legal, about, contact) ---------- */
+function headerHtml(t, otherHref, current = "") {
+  const otherLang = t.lang === "en" ? "ar" : "en";
+  const base = t.lang === "ar" ? "/ar/" : "/";
+  const P = pages[t.lang];
+  const cur = (k) => (current === k ? ' aria-current="page"' : "");
+  return `<header class="site-header" id="top">
+  <div class="wrap bar">
+    <a class="brand" href="${t.path}" aria-label="MABS · ${esc(t.brandSub)}">
+      <img src="/logo.png" alt="" width="40" height="40">
+      <span class="brand-text"><b>MABS</b><small>${esc(t.brandSub)}</small></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="${esc(t.nav.label)}">
+      <a href="${t.path}#product">${esc(t.nav.product)}</a>
+      <a href="${t.path}#features">${esc(t.nav.features)}</a>
+      <a href="${t.path}#faq">${esc(t.nav.faq)}</a>
+      <a href="${base}about/"${cur("about")}>${esc(P.nav.about)}</a>
+      <a href="${base}contact/"${cur("contact")}>${esc(t.nav.contact)}</a>
+      <div class="nav-mobile-actions">
+        <a class="btn btn-outline" href="${LOGIN}">${esc(t.nav.login)}</a>
+        <a class="btn btn-primary" href="${SIGNUP}">${esc(t.nav.start)}</a>
+      </div>
+    </nav>
+    <div class="bar-actions">
+      <a class="lang" href="${otherHref}" hreflang="${otherLang}" lang="${otherLang}" aria-label="${esc(t.otherAria)}">${icon("globe", 16)}<span>${esc(t.otherLabel)}</span></a>
+      <a class="link-login" href="${LOGIN}">${esc(t.nav.login)}</a>
+      <a class="btn btn-primary btn-sm" href="${SIGNUP}">${esc(t.nav.start)}</a>
+      <button class="menu-btn" type="button" aria-controls="site-nav" aria-expanded="false" data-open="${esc(t.nav.menu)}" data-close="${esc(t.nav.close)}" aria-label="${esc(t.nav.menu)}">${icon("menu", 22)}</button>
+    </div>
+  </div>
+</header>`;
+}
+
+/* ---------- about & contact pages ---------- */
+function pageHead(t, title, desc, enPath, arPath) {
+  const self = t.lang === "en" ? enPath : arPath;
+  return `<!doctype html>
+<html lang="${t.lang}" dir="${t.dir}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(desc)}">
+<link rel="canonical" href="${SITE}${self}">
+<link rel="alternate" hreflang="en" href="${SITE}${enPath}">
+<link rel="alternate" hreflang="ar" href="${SITE}${arPath}">
+<link rel="alternate" hreflang="x-default" href="${SITE}${enPath}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="${esc(title)}">
+<meta property="og:description" content="${esc(desc)}">
+<meta property="og:url" content="${SITE}${self}">
+<meta property="og:image" content="${SITE}/logo.png">
+<meta name="theme-color" content="#f8f8f8">
+<link rel="icon" href="/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap">
+<link rel="stylesheet" href="/styles.css">
+<script>document.documentElement.classList.add('js')</script>`;
+}
+
+const ORG_ADDRESS = { "@type": "PostalAddress", streetAddress: COMPANY.street, addressLocality: "Sheridan", addressRegion: "WY", postalCode: "82801", addressCountry: "US" };
+
+function addressHtml() {
+  return `<address class="addr" dir="ltr" lang="en">${esc(COMPANY.entity)}<br>${esc(COMPANY.street)}<br>${esc(COMPANY.city)}<br>${esc(COMPANY.country)}</address>`;
+}
+
+function aboutPage(t) {
+  const A = pages[t.lang].about;
+  const base = t.lang === "ar" ? "/ar/" : "/";
+  const enPath = "/about/", arPath = "/ar/about/";
+  return `${pageHead(t, A.seoTitle, A.desc, enPath, arPath)}
+<script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org", "@type": "Organization",
+    name: COMPANY.trading, legalName: COMPANY.entity, url: SITE, logo: `${SITE}/logo.png`, email: COMPANY.support, address: ORG_ADDRESS,
+  })}</script>
+</head>
+<body>
+<a class="skip" href="#main">${esc(t.skip)}</a>
+${headerHtml(t, t.lang === "en" ? arPath : enPath, "about")}
+<main id="main">
+  <section class="page-hero">
+    <div class="wrap page-hero-inner reveal">
+      <p class="eyebrow">${esc(A.eyebrow)}</p>
+      <h1>${esc(A.h1)}</h1>
+      <p class="lead">${esc(A.lead)}</p>
+    </div>
+  </section>
+  <section class="section band">
+    <div class="wrap two-col">
+      <div class="reveal"><h2>${esc(A.storyTitle)}</h2></div>
+      <div class="prose reveal">${A.story.map((p) => `<p>${esc(p)}</p>`).join("")}</div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal"><h2>${esc(A.principlesTitle)}</h2></div>
+      <div class="grid g4">${A.principles.map(([h, b]) => `
+        <div class="why reveal"><h3>${esc(h)}</h3><p>${esc(b)}</p></div>`).join("")}
+      </div>
+    </div>
+  </section>
+  <section class="section band">
+    <div class="wrap two-col">
+      <div class="reveal"><h2>${esc(A.whatTitle)}</h2></div>
+      <ul class="checklist reveal">${A.what.map((w) => `<li>${icon("check", 18)}<span>${esc(w)}</span></li>`).join("")}</ul>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap two-col">
+      <div class="reveal"><h2>${esc(A.companyTitle)}</h2></div>
+      <div class="prose reveal">${A.companyLines.map((l) => `<p>${esc(l)}</p>`).join("")}${addressHtml()}</div>
+    </div>
+  </section>
+  <section class="final">
+    <div class="wrap final-inner reveal">
+      <h2>${esc(A.ctaTitle)}</h2>
+      <div class="cta-row center">
+        <a class="btn btn-primary btn-lg" href="${SIGNUP}">${esc(A.cta)}</a>
+        <a class="text-link" href="${base}contact/">${esc(A.cta2)} ${icon("arrow", 16, "flip")}</a>
+      </div>
+      <p class="note">${icon("check", 16)} ${esc(t.hero.plan)}</p>
+    </div>
+  </section>
+</main>
+${footerHtml(t)}
+<script src="/site.js" defer></script>
+</body>
+</html>
+`;
+}
+
+function contactPage(t) {
+  const C = pages[t.lang].contact;
+  const L = legal[t.lang];
+  const base = t.lang === "ar" ? "/ar/" : "/";
+  const enPath = "/contact/", arPath = "/ar/contact/";
+  return `${pageHead(t, C.seoTitle, C.desc, enPath, arPath)}
+<script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org", "@type": "ContactPage", url: `${SITE}${t.lang === "en" ? enPath : arPath}`,
+    mainEntity: {
+      "@type": "Organization", name: COMPANY.trading, legalName: COMPANY.entity, email: COMPANY.support, address: ORG_ADDRESS,
+      contactPoint: [
+        { "@type": "ContactPoint", contactType: "customer support", email: COMPANY.support, availableLanguage: ["English", "Arabic"] },
+        { "@type": "ContactPoint", contactType: "privacy", email: COMPANY.privacy },
+      ],
+    },
+  })}</script>
+</head>
+<body>
+<a class="skip" href="#main">${esc(t.skip)}</a>
+${headerHtml(t, t.lang === "en" ? arPath : enPath, "contact")}
+<main id="main">
+  <section class="page-hero">
+    <div class="wrap page-hero-inner reveal">
+      <p class="eyebrow">${esc(C.eyebrow)}</p>
+      <h1>${esc(C.h1)}</h1>
+      <p class="lead">${esc(C.lead)}</p>
+    </div>
+  </section>
+  <section class="section band">
+    <div class="wrap">
+      <div class="grid g3c">${C.cards.map((c) => {
+        const email = COMPANY[c.email];
+        return `
+        <article class="card contact-card reveal">${icon(c.icon, 22, "card-ic")}<h2 class="card-title">${esc(c.title)}</h2><p>${esc(c.desc)}</p><a class="contact-mail" href="mailto:${email}" dir="ltr">${esc(email)}</a></article>`;
+      }).join("")}
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap info-grid">
+      <div class="info reveal">
+        <h2>${esc(C.memberTitle)}</h2>
+        <p>${esc(C.memberText)}</p>
+        <a class="btn btn-outline" href="${APP}/support">${esc(C.memberLink)}</a>
+      </div>
+      <div class="info reveal">
+        <h2>${esc(C.addressTitle)}</h2>
+        ${addressHtml()}
+        <p class="muted">${esc(C.addressNote)}</p>
+      </div>
+      <div class="info reveal">
+        <h2>${esc(C.hoursTitle)}</h2>
+        <p>${esc(C.hours)}</p>
+        <h2 class="mt">${esc(C.legalTitle)}</h2>
+        <p class="links"><a href="${base}privacy/">${esc(L.privacy.title)}</a><a href="${base}terms/">${esc(L.terms.title)}</a><a href="${base}cookies/">${esc(L.cookies.title)}</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+${footerHtml(t)}
+<script src="/site.js" defer></script>
 </body>
 </html>
 `;
@@ -267,31 +456,7 @@ function page(t) {
 <body>
 <a class="skip" href="#main">${esc(t.skip)}</a>
 
-<header class="site-header" id="top">
-  <div class="wrap bar">
-    <a class="brand" href="${t.path}" aria-label="MABS · ${esc(t.brandSub)}">
-      <img src="/logo.png" alt="" width="40" height="40">
-      <span class="brand-text"><b>MABS</b><small>${esc(t.brandSub)}</small></span>
-    </a>
-    <nav class="nav" id="site-nav" aria-label="${esc(t.nav.label)}">
-      <a href="#product">${esc(t.nav.product)}</a>
-      <a href="#how">${esc(t.nav.how)}</a>
-      <a href="#features">${esc(t.nav.features)}</a>
-      <a href="#faq">${esc(t.nav.faq)}</a>
-      <a href="#contact">${esc(t.nav.contact)}</a>
-      <div class="nav-mobile-actions">
-        <a class="btn btn-outline" href="${LOGIN}">${esc(t.nav.login)}</a>
-        <a class="btn btn-primary" href="${SIGNUP}">${esc(t.nav.start)}</a>
-      </div>
-    </nav>
-    <div class="bar-actions">
-      <a class="lang" href="${t.other}" hreflang="${otherLang}" lang="${otherLang}" aria-label="${esc(t.otherAria)}">${icon("globe", 16)}<span>${esc(t.otherLabel)}</span></a>
-      <a class="link-login" href="${LOGIN}">${esc(t.nav.login)}</a>
-      <a class="btn btn-primary btn-sm" href="${SIGNUP}">${esc(t.nav.start)}</a>
-      <button class="menu-btn" type="button" aria-controls="site-nav" aria-expanded="false" data-open="${esc(t.nav.menu)}" data-close="${esc(t.nav.close)}" aria-label="${esc(t.nav.menu)}">${icon("menu", 22)}</button>
-    </div>
-  </div>
-</header>
+${headerHtml(t, t.other)}
 
 <main id="main">
 
@@ -506,7 +671,14 @@ for (const t of [en, ar]) {
     writeFileSync(`${dir}/index.html`, legalPage(t, key));
   }
 }
-const urls = ["/", "/privacy/", "/terms/", "/cookies/"];
+for (const t of [en, ar]) {
+  const pre = t.lang === "ar" ? "public/ar" : "public";
+  mkdirSync(`${pre}/about`, { recursive: true });
+  mkdirSync(`${pre}/contact`, { recursive: true });
+  writeFileSync(`${pre}/about/index.html`, aboutPage(t));
+  writeFileSync(`${pre}/contact/index.html`, contactPage(t));
+}
+const urls = ["/", "/about/", "/contact/", "/privacy/", "/terms/", "/cookies/"];
 writeFileSync("public/sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${urls.map((u) => `  <url><loc>${SITE}${u}</loc><xhtml:link rel="alternate" hreflang="ar" href="${SITE}/ar${u}"/></url>
