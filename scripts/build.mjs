@@ -4,6 +4,7 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import { en, ar, APP, SITE } from "./content.mjs";
 import { legal, LEGAL_UPDATED } from "./legal.mjs";
 import { pages, COMPANY, chatStrings } from "./pages.mjs";
+import { how } from "./howitworks.mjs";
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const br = (s) => esc(s).replace(/\n/g, "<br>");
@@ -135,7 +136,7 @@ function footerHtml(t) {
       <p>${esc(t.footer.desc)}</p>
     </div>
     <nav aria-label="${esc(t.footer.navLabel)}" class="foot-cols">
-      <div><h3>${esc(t.footer.navTitle)}</h3><a href="${t.path}#product">${esc(t.nav.product)}</a><a href="${t.path}#features">${esc(t.nav.features)}</a><a href="${t.path}#how">${esc(t.nav.how)}</a><a href="${t.path}#faq">${esc(t.nav.faq)}</a></div>
+      <div><h3>${esc(t.footer.navTitle)}</h3><a href="${t.path}#product">${esc(t.nav.product)}</a><a href="${t.path}#features">${esc(t.nav.features)}</a><a href="${base}how-it-works/">${esc(t.nav.how)}</a><a href="${t.path}#faq">${esc(t.nav.faq)}</a></div>
       <div><h3>${esc(t.footer.accountTitle)}</h3><a href="${LOGIN}">${esc(t.nav.login)}</a><a href="${SIGNUP}">${esc(t.nav.start)}</a><a href="${APP}/support">${esc(t.footer.support)}</a></div>
       <div><h3>${esc(L.labels.legal)}</h3><a href="${base}privacy/">${esc(L.privacy.title)}</a><a href="${base}terms/">${esc(L.terms.title)}</a><a href="${base}cookies/">${esc(L.cookies.title)}</a></div>
       <div><h3>${esc(t.footer.companyTitle)}</h3><span>${esc(t.footer.company)}</span><a href="${base}about/">${esc(pages[t.lang].nav.about)}</a><a href="${base}contact/">${esc(t.nav.contact)}</a><a href="${t.other}" hreflang="${otherLang}" lang="${otherLang}">${esc(t.otherLabel)}</a></div>
@@ -222,6 +223,7 @@ function headerHtml(t, otherHref, current = "") {
     </a>
     <nav class="nav" id="site-nav" aria-label="${esc(t.nav.label)}">
       <a href="${t.path}#product">${esc(t.nav.product)}</a>
+      <a href="${base}how-it-works/"${cur("how")}>${esc(t.nav.how)}</a>
       <a href="${t.path}#features">${esc(t.nav.features)}</a>
       <a href="${t.path}#faq">${esc(t.nav.faq)}</a>
       <a href="${base}about/"${cur("about")}>${esc(P.nav.about)}</a>
@@ -297,7 +299,7 @@ ${headerHtml(t, t.lang === "en" ? arPath : enPath, "about")}
       <p class="eyebrow">${esc(A.eyebrow)}</p>
       <h1>${esc(A.h1)}</h1>
       <p class="lead">${esc(A.lead)}</p>
-      <div class="cta-row"><a class="btn btn-primary btn-lg" href="${SIGNUP}">${esc(A.heroCta)}</a><a class="btn btn-outline btn-lg" href="${t.path}#how">${esc(A.heroCta2)}</a></div>
+      <div class="cta-row"><a class="btn btn-primary btn-lg" href="${SIGNUP}">${esc(A.heroCta)}</a><a class="btn btn-outline btn-lg" href="${base}how-it-works/">${esc(A.heroCta2)}</a></div>
     </div>
   </section>
 
@@ -389,6 +391,186 @@ ${headerHtml(t, t.lang === "en" ? arPath : enPath, "about")}
         }).join("")}</dl>
         <p class="links-row"><b>${esc(A.legalTitle)}:</b> <a href="${base}privacy/">${esc(L.privacy.title)}</a> · <a href="${base}terms/">${esc(L.terms.title)}</a> · <a href="${base}cookies/">${esc(L.cookies.title)}</a></p>
       </div>
+    </div>
+  </section>
+</main>
+${footerHtml(t)}
+<script src="/site.js" defer></script>
+</body>
+</html>
+`;
+}
+
+/* ---------- how it works page ---------- */
+function howPage(t) {
+  const H = how[t.lang];
+  const base = t.lang === "ar" ? "/ar/" : "/";
+  const enPath = "/how-it-works/", arPath = "/ar/how-it-works/";
+  const avail = (k) => `<span class="hw-av ${k}"><i aria-hidden="true"></i>${esc(k === "free" ? H.legendFree : H.legendPaid)}</span>`;
+  const chip = ([name, k]) => `<li class="hw-chip ${k}"><span>${esc(name)}</span><span class="sr-only"> (${esc(k === "free" ? H.legendFree : H.legendPaid)})</span></li>`;
+  const stepPanel = (s, i) => {
+    if (i === 0) return `
+          <div class="hw-panel">
+            <h4>${esc(s.listTitle)}</h4>
+            <ul class="hw-list">${s.list.map((x) => `<li>${icon("check", 16)}<span>${esc(x)}</span></li>`).join("")}</ul>
+          </div>`;
+    if (i === 1) return `
+          <div class="hw-panel">
+            <h4>${esc(s.listTitle)}</h4>
+            <ul class="hw-chips">${s.chips.map(chip).join("")}</ul>
+            <div class="hw-legend">${avail("free")}${avail("paid")}</div>
+          </div>`;
+    return `
+          <div class="hw-panel">
+            <h4>${esc(s.listTitle)}</h4>
+            <ul class="hw-list">${s.list.map((x) => `<li>${icon("check", 16)}<span>${esc(x)}</span></li>`).join("")}</ul>
+            ${s.note ? `<p class="hw-panel-note">${esc(s.note)}</p>` : ""}
+          </div>`;
+  };
+  return `${pageHead(t, H.seoTitle, H.desc, enPath, arPath)}
+<script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org", "@type": "HowTo", name: H.h1, description: H.desc, inLanguage: t.lang,
+    step: H.steps.map((s, i) => ({ "@type": "HowToStep", position: i + 1, name: H.rail[i], text: s.body })),
+  })}</script>
+<script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org", "@type": "FAQPage",
+    mainEntity: H.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+  })}</script>
+</head>
+<body>
+<a class="skip" href="#main">${esc(t.skip)}</a>
+${headerHtml(t, t.lang === "en" ? arPath : enPath, "how")}
+<main id="main">
+  <section class="page-hero hw-hero">
+    <div class="wrap page-hero-inner reveal">
+      <p class="eyebrow">${esc(H.eyebrow)}</p>
+      <h1>${esc(H.h1)}</h1>
+      <p class="lead">${esc(H.lead)}</p>
+      <div class="cta-row"><a class="btn btn-primary btn-lg" href="${SIGNUP}">${esc(H.cta)}</a><a class="btn btn-outline btn-lg" href="#create">${esc(H.cta2)}</a></div>
+      <p class="note">${icon("check", 16)} ${esc(t.hero.plan)}</p>
+    </div>
+    <div class="wrap">
+      <ol class="hw-rail reveal" aria-label="${esc(H.stepsTitle)}">
+        ${H.rail.map((r, i) => `<li><a href="#step-${i + 1}"><span class="hw-rail-num">0${i + 1}</span><span>${esc(r)}</span></a></li>`).join("\n        ")}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section band" aria-labelledby="hw-steps">
+    <div class="wrap">
+      <div class="section-head reveal"><p class="eyebrow">${esc(H.stepsEyebrow)}</p><h2 id="hw-steps">${esc(H.stepsTitle)}</h2><p class="sub">${esc(H.stepsSub)}</p></div>
+      <ol class="hw-steps">
+        ${H.steps.map((s, i) => `<li class="hw-step reveal" id="step-${i + 1}">
+          <div class="hw-step-mark" aria-hidden="true"><span>0${i + 1}</span></div>
+          <div class="hw-step-copy">
+            <p class="hw-kicker">${esc(H.stepWord)} ${i + 1} · ${esc(H.rail[i])}</p>
+            <h3>${esc(s.h)}</h3>
+            <p class="hw-body">${esc(s.body)}</p>
+            <p class="hw-micro">${esc(s.micro)}</p>
+          </div>${stepPanel(s, i)}
+        </li>`).join("\n        ")}
+      </ol>
+
+      <div class="hw-lives reveal" aria-labelledby="hw-lives">
+        <h3 id="hw-lives">${esc(H.livesTitle)}</h3>
+        <dl class="hw-lives-grid">${H.lives.map(([n, w, d]) => `<div><dt>${esc(n)}</dt><dd><b>${esc(w)}</b><span>${esc(d)}</span></dd></div>`).join("")}</dl>
+        <p class="hw-panel-note">${esc(H.livesNote)}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="hw-context">
+    <div class="wrap">
+      <div class="section-head reveal"><p class="eyebrow">${esc(H.contextEyebrow)}</p><h2 id="hw-context">${esc(H.contextTitle)}</h2><p class="sub">${esc(H.contextSub)}</p></div>
+      <div class="hw-compare">
+        ${H.compare.map((c, i) => `<div class="hw-cmp${i ? " on" : ""} reveal"><h3>${esc(c.title)}</h3><ul>${c.items.map((x) => `<li>${i ? icon("check", 16) : '<span class="hw-dash" aria-hidden="true"></span>'}<span>${esc(x)}</span></li>`).join("")}</ul></div>`).join("\n        ")}
+      </div>
+    </div>
+  </section>
+
+  <section class="philosophy" aria-labelledby="hw-principles">
+    <div class="wrap philo-grid">
+      <div class="reveal"><p class="eyebrow light">MABS</p><h2 id="hw-principles">${esc(H.principlesTitle)}</h2><p class="sub">${esc(H.contextNote)}</p></div>
+      <ul class="principles reveal">${H.principles.map((p) => `<li>${icon("check", 18)}<p>${esc(p)}</p></li>`).join("")}</ul>
+    </div>
+  </section>
+
+  <section class="section band" id="create" aria-labelledby="hw-create">
+    <div class="wrap">
+      <div class="section-head reveal"><p class="eyebrow">${esc(H.createEyebrow)}</p><h2 id="hw-create">${esc(H.createTitle)}</h2><p class="sub">${esc(H.createSub)}</p><div class="hw-legend">${avail("free")}${avail("paid")}</div></div>
+      <div class="hw-cats">
+        ${H.cats.map((c) => `<article class="card hw-cat reveal">
+          ${icon(c.icon, 22, "card-ic")}
+          <h3>${esc(c.title)}</h3>
+          <p>${esc(c.desc)}</p>
+          <ul class="hw-chips">${c.gens.map(chip).join("")}</ul>
+          <figure class="hw-sample"><figcaption>${esc(H.exampleLabel)}</figcaption><p>${esc(c.example)}</p></figure>
+        </article>`).join("\n        ")}
+      </div>
+      <p class="hw-foot reveal">${esc(H.createNote)}</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="hw-example">
+    <div class="wrap">
+      <div class="section-head reveal"><p class="eyebrow">${esc(H.exEyebrow)}</p><h2 id="hw-example">${esc(H.exTitle)}</h2><p class="sub">${esc(H.exSub)}</p></div>
+      <div class="hw-ex">
+        <div class="hw-ex-meta reveal">
+          <div><h3>${esc(H.exGoalLabel)}</h3><p>${esc(H.exGoal)}</p></div>
+          <div><h3>${esc(H.exProcessLabel)}</h3><p>${esc(H.exProcess)}</p></div>
+        </div>
+        <div class="hw-ex-in reveal">
+          <h3>${esc(H.exInputsLabel)}</h3>
+          <dl>${H.exInputs.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>
+          <p class="hw-blank">${esc(H.exBlank)}</p>
+        </div>
+        <div class="hw-ex-arrow" aria-hidden="true">${icon("arrow", 22, "flip")}</div>
+        <div class="hw-ex-out reveal">
+          <div class="hw-ex-out-head"><h3>${esc(H.exResultLabel)}</h3><span class="tag">${esc(H.exResultTag)}</span></div>
+          <p class="hw-ex-text">${esc(H.exResult)}</p>
+          <p class="hw-ex-badge"><span class="badge">${esc(H.exBrandBadge)}</span></p>
+          <p class="hw-callout">${icon("check", 16)}<span>${esc(H.exCallout)}</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band" aria-labelledby="hw-ready">
+    <div class="wrap">
+      <div class="section-head reveal"><p class="eyebrow">${esc(H.readyEyebrow)}</p><h2 id="hw-ready">${esc(H.readyTitle)}</h2><p class="sub">${esc(H.readySub)}</p></div>
+      <div class="hw-ready">
+        ${H.ready.map(([h, b, k]) => `<article class="card reveal"><div class="hw-ready-top"><h3>${esc(h)}</h3>${avail(k)}</div><p>${esc(b)}</p></article>`).join("\n        ")}
+      </div>
+      <ul class="checklist hw-ready-notes reveal">
+        <li>${icon("check", 18)}<span>${esc(H.readyNo)}</span></li>
+        <li>${icon("check", 18)}<span>${esc(H.readyNote)}</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="hw-trust">
+    <div class="wrap two-col">
+      <div class="reveal"><p class="eyebrow">${esc(H.trustEyebrow)}</p><h2 id="hw-trust" class="mt-s">${esc(H.trustTitle)}</h2><p class="prose-p mt-s">${esc(H.trustText)}</p><p class="hw-foot left">${esc(H.trustNote)}</p></div>
+      <dl class="hw-trust reveal">${H.trustList.map(([k, v]) => `<div>${icon("check", 18)}<dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>
+    </div>
+  </section>
+
+  <section class="section band" aria-labelledby="hw-faq">
+    <div class="wrap faq-grid">
+      <div class="section-head"><h2 id="hw-faq">${esc(H.faqTitle)}</h2><a class="text-link" href="${t.path}#faq">${esc(H.faqMore)} ${icon("arrow", 16, "flip")}</a></div>
+      <div class="faq">${H.faq.map(([q, a]) => `<details><summary><span>${esc(q)}</span><i aria-hidden="true"></i></summary><p>${esc(a)}</p></details>`).join("")}</div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap final-inner reveal">
+      <h2>${esc(H.finalTitle)}</h2>
+      <p class="sub">${esc(H.finalText)}</p>
+      <div class="cta-row center">
+        <a class="btn btn-primary btn-lg" href="${SIGNUP}">${esc(H.finalCta)}</a>
+        <a class="btn btn-outline btn-lg" href="${t.path}#product">${esc(H.finalCta2)}</a>
+      </div>
+      <p class="note">${icon("check", 16)} ${esc(t.hero.plan)}</p>
     </div>
   </section>
 </main>
@@ -780,8 +962,10 @@ for (const t of [en, ar]) {
   mkdirSync(`${pre}/contact`, { recursive: true });
   writeFileSync(`${pre}/about/index.html`, aboutPage(t));
   writeFileSync(`${pre}/contact/index.html`, contactPage(t));
+  mkdirSync(`${pre}/how-it-works`, { recursive: true });
+  writeFileSync(`${pre}/how-it-works/index.html`, howPage(t));
 }
-const urls = ["/", "/about/", "/contact/", "/privacy/", "/terms/", "/cookies/"];
+const urls = ["/", "/how-it-works/", "/about/", "/contact/", "/privacy/", "/terms/", "/cookies/"];
 writeFileSync("public/sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${urls.map((u) => `  <url><loc>${SITE}${u}</loc><xhtml:link rel="alternate" hreflang="ar" href="${SITE}/ar${u}"/></url>

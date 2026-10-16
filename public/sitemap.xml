@@ -2,6 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url><loc>https://megmos.com/</loc><xhtml:link rel="alternate" hreflang="ar" href="https://megmos.com/ar/"/></url>
   <url><loc>https://megmos.com/ar/</loc><xhtml:link rel="alternate" hreflang="en" href="https://megmos.com/"/></url>
+  <url><loc>https://megmos.com/how-it-works/</loc><xhtml:link rel="alternate" hreflang="ar" href="https://megmos.com/ar/how-it-works/"/></url>
+  <url><loc>https://megmos.com/ar/how-it-works/</loc><xhtml:link rel="alternate" hreflang="en" href="https://megmos.com/how-it-works/"/></url>
   <url><loc>https://megmos.com/about/</loc><xhtml:link rel="alternate" hreflang="ar" href="https://megmos.com/ar/about/"/></url>
   <url><loc>https://megmos.com/ar/about/</loc><xhtml:link rel="alternate" hreflang="en" href="https://megmos.com/about/"/></url>
   <url><loc>https://megmos.com/contact/</loc><xhtml:link rel="alternate" hreflang="ar" href="https://megmos.com/ar/contact/"/></url>
