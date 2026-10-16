@@ -367,3 +367,30 @@ html:not([dir="rtl"]) .back-ic{transform:scaleX(-1)}
   .link-login{display:none}
 }
 .foot-cols a,.foot-cols span{overflow-wrap:anywhere}
+
+/* about page v2 */
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.acronym{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+.acronym div{display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 16px;min-width:76px;background:var(--paper);border:1px solid var(--stone);border-radius:var(--radius)}
+.acronym b{font-family:'IBM Plex Serif',Georgia,serif;font-size:34px;font-weight:500;color:var(--olive);line-height:1}
+.acronym span{font-size:12px;color:var(--muted);letter-spacing:.04em}
+.mv{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.mv-card{padding:36px;border-radius:var(--radius);background:var(--olive);color:#fff;display:flex;flex-direction:column;gap:14px}
+.mv-card .eyebrow{color:var(--sage-lt)}
+.mv-card.soft{background:var(--white);color:var(--ink);border:1px solid var(--stone)}
+.mv-card.soft .eyebrow{color:var(--olive)}
+.mv-text{font-family:var(--f-title);font-size:21px;line-height:1.5}
+.mv-card.soft .mv-text{color:var(--body);font-size:19px}
+.mt-s{margin-top:14px}
+.light-p{color:#d9dace!important;margin-bottom:18px}
+.prose-p{font-size:17px;line-height:1.75;color:var(--body);margin-bottom:22px}
+.roles,.facts-list{margin:0;display:flex;flex-direction:column;border-top:1px solid var(--stone)}
+.roles div,.facts-list div{display:grid;grid-template-columns:minmax(0,14rem) minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--stone)}
+.roles dt,.facts-list dt{font-weight:600;color:var(--ink)}
+.roles dd,.facts-list dd{margin:0;color:var(--body)}
+.details{background:var(--paper);border-top:1px solid var(--stone)}
+.links-row{margin-top:18px;color:var(--body);font-size:15px}
+@media (max-width:1080px){.g5{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:900px){.mv,.g2{grid-template-columns:1fr}.g5{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.g5{grid-template-columns:1fr}.roles div,.facts-list div{grid-template-columns:1fr;gap:4px}.mv-card{padding:26px}}

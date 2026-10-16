@@ -138,7 +138,7 @@ function footerHtml(t) {
       <div><h3>${esc(t.footer.navTitle)}</h3><a href="${t.path}#product">${esc(t.nav.product)}</a><a href="${t.path}#features">${esc(t.nav.features)}</a><a href="${t.path}#how">${esc(t.nav.how)}</a><a href="${t.path}#faq">${esc(t.nav.faq)}</a></div>
       <div><h3>${esc(t.footer.accountTitle)}</h3><a href="${LOGIN}">${esc(t.nav.login)}</a><a href="${SIGNUP}">${esc(t.nav.start)}</a><a href="${APP}/support">${esc(t.footer.support)}</a></div>
       <div><h3>${esc(L.labels.legal)}</h3><a href="${base}privacy/">${esc(L.privacy.title)}</a><a href="${base}terms/">${esc(L.terms.title)}</a><a href="${base}cookies/">${esc(L.cookies.title)}</a></div>
-      <div><h3>${esc(t.footer.companyTitle)}</h3><span>${esc(t.footer.company)}</span><a href="${base}about/">${esc(pages[t.lang].nav.about)}</a><a href="${base}contact/">${esc(t.nav.contact)}</a><a href="mailto:support@megmos.com" dir="ltr">support@megmos.com</a><a href="${t.other}" hreflang="${otherLang}" lang="${otherLang}">${esc(t.otherLabel)}</a></div>
+      <div><h3>${esc(t.footer.companyTitle)}</h3><span>${esc(t.footer.company)}</span><a href="${base}about/">${esc(pages[t.lang].nav.about)}</a><a href="${base}contact/">${esc(t.nav.contact)}</a><a href="${t.other}" hreflang="${otherLang}" lang="${otherLang}">${esc(t.otherLabel)}</a></div>
     </nav>
   </div>
   <div class="wrap foot-base"><span dir="ltr">© ${new Date().getFullYear()} Megmos LLC · Megmos Creative Co.</span></div>
@@ -275,12 +275,15 @@ function addressHtml() {
 
 function aboutPage(t) {
   const A = pages[t.lang].about;
+  const L = legal[t.lang];
   const base = t.lang === "ar" ? "/ar/" : "/";
   const enPath = "/about/", arPath = "/ar/about/";
   return `${pageHead(t, A.seoTitle, A.desc, enPath, arPath)}
 <script type="application/ld+json">${JSON.stringify({
     "@context": "https://schema.org", "@type": "Organization",
-    name: COMPANY.trading, legalName: COMPANY.entity, url: SITE, logo: `${SITE}/logo.png`, email: COMPANY.support, address: ORG_ADDRESS,
+    name: COMPANY.trading, legalName: COMPANY.entity, url: SITE, logo: `${SITE}/logo.png`, email: COMPANY.support,
+    address: { "@type": "PostalAddress", addressRegion: "WY", addressCountry: "US" },
+    makesOffer: { "@type": "Offer", itemOffered: { "@type": "SoftwareApplication", name: "MABS (Megmos AI Brand Studio)", url: APP, applicationCategory: "BusinessApplication" } },
   })}</script>
 </head>
 <body>
@@ -292,42 +295,98 @@ ${headerHtml(t, t.lang === "en" ? arPath : enPath, "about")}
       <p class="eyebrow">${esc(A.eyebrow)}</p>
       <h1>${esc(A.h1)}</h1>
       <p class="lead">${esc(A.lead)}</p>
+      <div class="cta-row"><a class="btn btn-primary btn-lg" href="${SIGNUP}">${esc(A.heroCta)}</a><a class="btn btn-outline btn-lg" href="${t.path}#how">${esc(A.heroCta2)}</a></div>
     </div>
   </section>
-  <section class="section band">
+
+  <section class="section band" aria-labelledby="ab-name">
     <div class="wrap two-col">
-      <div class="reveal"><h2>${esc(A.storyTitle)}</h2></div>
+      <div class="reveal">
+        <h2 id="ab-name">${esc(A.nameTitle)}</h2>
+        <div class="acronym" dir="ltr" lang="en">${A.nameParts.map(([l, w]) => `<div><b>${l}</b><span>${esc(w)}</span></div>`).join("")}</div>
+      </div>
+      <div class="prose reveal">${A.nameText.map((p) => `<p>${esc(p)}</p>`).join("")}</div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="ab-story">
+    <div class="wrap two-col">
+      <div class="reveal"><h2 id="ab-story">${esc(A.storyTitle)}</h2></div>
       <div class="prose reveal">${A.story.map((p) => `<p>${esc(p)}</p>`).join("")}</div>
     </div>
   </section>
-  <section class="section">
+
+  <section class="section band" aria-labelledby="ab-today">
     <div class="wrap">
-      <div class="section-head reveal"><h2>${esc(A.principlesTitle)}</h2></div>
-      <div class="grid g4">${A.principles.map(([h, b]) => `
+      <div class="section-head reveal"><h2 id="ab-today">${esc(A.todayTitle)}</h2><p class="sub">${esc(A.todayIntro)}</p></div>
+      <div class="grid g2">${A.today.map(([h, b], i) => `
+        <article class="card reveal">${icon(["sparkle", "layers", "browser", "globe"][i], 22, "card-ic")}<h3>${esc(h)}</h3><p>${esc(b)}</p></article>`).join("")}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="${esc(A.missionTitle)} · ${esc(A.visionTitle)}">
+    <div class="wrap mv">
+      <div class="mv-card reveal"><p class="eyebrow">${esc(A.missionTitle)}</p><p class="mv-text">${esc(A.mission)}</p></div>
+      <div class="mv-card soft reveal"><p class="eyebrow">${esc(A.visionTitle)}</p><p class="mv-text">${esc(A.vision)}</p></div>
+    </div>
+  </section>
+
+  <section class="section band" aria-labelledby="ab-who">
+    <div class="wrap two-col">
+      <div class="reveal"><h2 id="ab-who">${esc(A.whoTitle)}</h2><p class="sub mt-s">${esc(A.whoNote)}</p></div>
+      <ul class="checklist reveal">${A.who.map((w) => `<li>${icon("check", 18)}<span>${esc(w)}</span></li>`).join("")}</ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="ab-diff">
+    <div class="wrap">
+      <div class="section-head reveal"><h2 id="ab-diff">${esc(A.diffTitle)}</h2></div>
+      <div class="grid g5">${A.diff.map(([h, b]) => `
         <div class="why reveal"><h3>${esc(h)}</h3><p>${esc(b)}</p></div>`).join("")}
       </div>
     </div>
   </section>
-  <section class="section band">
-    <div class="wrap two-col">
-      <div class="reveal"><h2>${esc(A.whatTitle)}</h2></div>
-      <ul class="checklist reveal">${A.what.map((w) => `<li>${icon("check", 18)}<span>${esc(w)}</span></li>`).join("")}</ul>
+
+  <section class="philosophy" aria-labelledby="ab-approach">
+    <div class="wrap philo-grid">
+      <div class="reveal"><p class="eyebrow light">MABS</p><h2 id="ab-approach">${esc(A.approachTitle)}</h2></div>
+      <div class="reveal">${A.approach.map((p) => `<p class="sub light-p">${esc(p)}</p>`).join("")}</div>
     </div>
   </section>
-  <section class="section">
+
+  <section class="section" aria-labelledby="ab-company">
     <div class="wrap two-col">
-      <div class="reveal"><h2>${esc(A.companyTitle)}</h2></div>
-      <div class="prose reveal">${A.companyLines.map((l) => `<p>${esc(l)}</p>`).join("")}${addressHtml()}</div>
+      <div class="reveal"><h2 id="ab-company">${esc(A.companyTitle)}</h2></div>
+      <div class="reveal">
+        <p class="prose-p">${esc(A.companyIntro)}</p>
+        <dl class="roles">${A.companyRoles.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>
+      </div>
     </div>
   </section>
+
   <section class="final">
     <div class="wrap final-inner reveal">
       <h2>${esc(A.ctaTitle)}</h2>
+      <p class="sub">${esc(A.ctaSub)}</p>
       <div class="cta-row center">
         <a class="btn btn-primary btn-lg" href="${SIGNUP}">${esc(A.cta)}</a>
         <a class="text-link" href="${base}contact/">${esc(A.cta2)} ${icon("arrow", 16, "flip")}</a>
       </div>
       <p class="note">${icon("check", 16)} ${esc(t.hero.plan)}</p>
+    </div>
+  </section>
+
+  <section class="section details" aria-labelledby="ab-details">
+    <div class="wrap two-col">
+      <div class="reveal"><h2 id="ab-details">${esc(A.detailsTitle)}</h2></div>
+      <div class="reveal">
+        <dl class="facts-list">${A.details.map(([k, v]) => {
+          const val = v.endsWith(".com") ? `<a href="https://${v}" dir="ltr">${esc(v)}</a>` : `<span${/^[A-Za-z(]/.test(v) ? ' dir="ltr"' : ""}>${esc(v)}</span>`;
+          return `<div><dt>${esc(k)}</dt><dd>${val}</dd></div>`;
+        }).join("")}</dl>
+        <p class="links-row"><b>${esc(A.legalTitle)}:</b> <a href="${base}privacy/">${esc(L.privacy.title)}</a> · <a href="${base}terms/">${esc(L.terms.title)}</a> · <a href="${base}cookies/">${esc(L.cookies.title)}</a></p>
+      </div>
     </div>
   </section>
 </main>
