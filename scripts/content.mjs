@@ -200,7 +200,7 @@ export const en = {
   contact: {
     eyebrow: "Contact",
     title: "Talk to Us",
-    sub: "Questions about MABS, a demo for your team, or a partnership? Email us. We usually reply within 2 business days.",
+    sub: "Questions about MABS, a demo for your team, or a partnership? Email us, or use the contact form.",
     cards: [
       { icon: "mail", title: "General and support", desc: "Product questions, help with your account, or working with your brokerage.", email: "support@megmos.com" },
       { icon: "check", title: "Privacy", desc: "Data requests, such as access, export or deletion, and privacy questions.", email: "privacy@megmos.com" },
@@ -394,7 +394,7 @@ export const ar = {
   contact: {
     eyebrow: "تواصل معنا",
     title: "تحدّث إلينا",
-    sub: "لديك أسئلة عن MABS، أو تريد عرضًا لفريقك، أو شراكة؟ راسلنا بالبريد الإلكتروني، وعادةً نرد خلال يومي عمل.",
+    sub: "لديك أسئلة عن MABS، أو تريد عرضًا لفريقك، أو شراكة؟ راسلنا بالبريد الإلكتروني أو استخدم نموذج التواصل.",
     cards: [
       { icon: "mail", title: "الاستفسارات العامة والدعم", desc: "أسئلة عن المنتج، أو مساعدة في حسابك، أو العمل مع وكالتك.", email: "support@megmos.com" },
       { icon: "check", title: "الخصوصية", desc: "طلبات البيانات مثل الاطلاع أو التصدير أو الحذف، وأسئلة الخصوصية.", email: "privacy@megmos.com" },

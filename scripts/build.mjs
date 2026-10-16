@@ -399,18 +399,27 @@ ${footerHtml(t)}
 
 function contactPage(t) {
   const C = pages[t.lang].contact;
+  const F = C.form;
   const L = legal[t.lang];
   const base = t.lang === "ar" ? "/ar/" : "/";
   const enPath = "/contact/", arPath = "/ar/contact/";
+  const field = (id, label, input, { required = false, hint = "" } = {}) => `
+          <div class="cf-field" data-field="${id}">
+            <label for="cf-${id}">${esc(label)}${required ? ' <span class="req" aria-hidden="true">*</span>' : ` <span class="opt">(${esc(F.optional)})</span>`}</label>
+            ${input}
+            ${hint ? `<p class="cf-hint" id="cf-${id}-hint">${esc(hint)}</p>` : ""}
+            <p class="cf-error" id="cf-${id}-error" hidden></p>
+          </div>`;
+  const msgs = {
+    required: F.errRequired, email: F.errEmail, messageShort: F.errMessageShort, tooLong: F.errTooLong,
+    summary: F.errSummary, send: F.errSend, rate: F.errRate, sending: F.sending, submit: F.submit, counter: F.counter,
+  };
   return `${pageHead(t, C.seoTitle, C.desc, enPath, arPath)}
 <script type="application/ld+json">${JSON.stringify({
     "@context": "https://schema.org", "@type": "ContactPage", url: `${SITE}${t.lang === "en" ? enPath : arPath}`,
     mainEntity: {
-      "@type": "Organization", name: COMPANY.trading, legalName: COMPANY.entity, email: COMPANY.support, address: ORG_ADDRESS,
-      contactPoint: [
-        { "@type": "ContactPoint", contactType: "customer support", email: COMPANY.support, availableLanguage: ["English", "Arabic"] },
-        { "@type": "ContactPoint", contactType: "privacy", email: COMPANY.privacy },
-      ],
+      "@type": "Organization", name: COMPANY.trading, legalName: COMPANY.entity, url: SITE, email: COMPANY.support,
+      contactPoint: [{ "@type": "ContactPoint", contactType: "customer support", email: COMPANY.support, availableLanguage: ["English", "Arabic"] }],
     },
   })}</script>
 </head>
@@ -418,46 +427,79 @@ function contactPage(t) {
 <a class="skip" href="#main">${esc(t.skip)}</a>
 ${headerHtml(t, t.lang === "en" ? arPath : enPath, "contact")}
 <main id="main">
-  <section class="page-hero">
-    <div class="wrap page-hero-inner reveal">
+  <section class="page-hero compact">
+    <div class="wrap page-hero-inner">
       <p class="eyebrow">${esc(C.eyebrow)}</p>
       <h1>${esc(C.h1)}</h1>
       <p class="lead">${esc(C.lead)}</p>
+      <div class="cta-row"><a class="btn btn-primary btn-lg" href="#contact-form" data-focus-form>${esc(C.cta)}</a></div>
     </div>
   </section>
-  <section class="section band">
-    <div class="wrap">
-      <div class="grid g3c">${C.cards.map((c) => {
-        const email = COMPANY[c.email];
-        return `
-        <article class="card contact-card reveal">${icon(c.icon, 22, "card-ic")}<h2 class="card-title">${esc(c.title)}</h2><p>${esc(c.desc)}</p><a class="contact-mail" href="mailto:${email}" dir="ltr">${esc(email)}</a></article>`;
-      }).join("")}
+
+  <section class="section band cf-section">
+    <div class="wrap cf-grid">
+      <aside class="cf-aside">
+        <div class="cf-info">
+          <h2>${esc(C.emailTitle)}</h2>
+          <p>${esc(C.emailText)}</p>
+          <a class="contact-mail" href="mailto:${COMPANY.support}" dir="ltr">${COMPANY.support}</a>
+        </div>
+        <div class="cf-info">
+          <h2>${esc(C.privacyTitle)}</h2>
+          <p>${esc(C.privacyText)}</p>
+          <a class="contact-mail" href="mailto:${COMPANY.privacy}" dir="ltr">${COMPANY.privacy}</a>
+        </div>
+        <div class="cf-info">
+          <h2>${esc(C.memberTitle)}</h2>
+          <p>${esc(C.memberText)}</p>
+          <a class="text-link" href="${APP}/support">${esc(C.memberLink)} ${icon("arrow", 16, "flip")}</a>
+        </div>
+      </aside>
+
+      <div class="cf-card" id="contact-form">
+        <h2>${esc(F.title)}</h2>
+        <form class="cf" novalidate data-endpoint="${APP}/api/v1/contact" data-locale="${t.lang}" aria-describedby="cf-status">
+          <script type="application/json" class="cf-i18n">${JSON.stringify(msgs)}</script>
+          <div class="cf-row">${field("name", F.name, `<input id="cf-name" name="name" type="text" autocomplete="name" required maxlength="200">`, { required: true })}${field("email", F.email, `<input id="cf-email" name="email" type="email" autocomplete="email" required maxlength="320" dir="ltr">`, { required: true })}</div>
+          <div class="cf-row">${field("company", F.company, `<input id="cf-company" name="company" type="text" autocomplete="organization" maxlength="200">`)}${field("inquiryType", F.inquiry, `<select id="cf-inquiryType" name="inquiryType">${F.inquiryTypes.map(([v, l]) => `<option value="${v}">${esc(l)}</option>`).join("")}</select>`)}</div>
+          ${field("subject", F.subject, `<input id="cf-subject" name="subject" type="text" required maxlength="300">`, { required: true })}
+          ${field("message", F.message, `<textarea id="cf-message" name="message" rows="7" required minlength="10" maxlength="5000" aria-describedby="cf-message-hint cf-message-count"></textarea><p class="cf-count" id="cf-message-count" aria-live="polite">0 / 5000</p>`, { required: true, hint: F.messageHint })}
+          <div class="cf-hp" aria-hidden="true"><label for="cf-website">Website</label><input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+          <p class="cf-privacy">${esc(F.privacyBefore)}<a href="${base}privacy/" target="_blank" rel="noopener">${esc(F.privacyLink)}</a>${esc(F.privacyAfter)}</p>
+          <p class="cf-status" id="cf-status" role="status" aria-live="polite"></p>
+          <button class="btn btn-primary btn-lg cf-submit" type="submit">${esc(F.submit)}</button>
+        </form>
+        <div class="cf-success" hidden tabindex="-1">
+          ${icon("check", 28)}
+          <p>${esc(F.success)}</p>
+          <button type="button" class="btn btn-outline cf-again">${esc(F.sendAnother)}</button>
+        </div>
       </div>
     </div>
   </section>
-  <section class="section">
-    <div class="wrap info-grid">
-      <div class="info reveal">
-        <h2>${esc(C.memberTitle)}</h2>
-        <p>${esc(C.memberText)}</p>
-        <a class="btn btn-outline" href="${APP}/support">${esc(C.memberLink)}</a>
-      </div>
-      <div class="info reveal">
-        <h2>${esc(C.addressTitle)}</h2>
-        ${addressHtml()}
-        <p class="muted">${esc(C.addressNote)}</p>
-      </div>
-      <div class="info reveal">
-        <h2>${esc(C.hoursTitle)}</h2>
-        <p>${esc(C.hours)}</p>
-        <h2 class="mt">${esc(C.legalTitle)}</h2>
-        <p class="links"><a href="${base}privacy/">${esc(L.privacy.title)}</a><a href="${base}terms/">${esc(L.terms.title)}</a><a href="${base}cookies/">${esc(L.cookies.title)}</a></p>
-      </div>
+
+  <section class="section" aria-labelledby="cf-team">
+    <div class="wrap two-col">
+      <div><h2 id="cf-team">${esc(C.teamTitle)}</h2><p class="prose-p mt-s">${esc(C.teamText)}</p></div>
+      <dl class="facts-list">${C.teamDetails.map(([k, v]) => {
+        const val = v.startsWith("https://") ? `<a href="${v}" dir="ltr">${esc(v.replace("https://", ""))}</a>`
+          : v.includes("@") ? `<a href="mailto:${v}" dir="ltr">${esc(v)}</a>`
+          : `<span${/^[A-Za-z(]/.test(v) ? ' dir="ltr"' : ""}>${esc(v)}</span>`;
+        return `<div><dt>${esc(k)}</dt><dd>${val}</dd></div>`;
+      }).join("")}</dl>
+    </div>
+  </section>
+
+  <section class="section band" aria-labelledby="cf-faq">
+    <div class="wrap faq-grid">
+      <div class="section-head"><h2 id="cf-faq">${esc(C.faqTitle)}</h2><a class="text-link" href="${t.path}#faq">${esc(C.faqMore)} ${icon("arrow", 16, "flip")}</a></div>
+      <div class="faq">${C.faq.map(([q, a]) => `<details><summary><span>${esc(q)}</span><i aria-hidden="true"></i></summary><p>${esc(a)}</p></details>`).join("")}</div>
     </div>
   </section>
 </main>
 ${footerHtml(t)}
 <script src="/site.js" defer></script>
+<script src="/contact.js" defer></script>
 </body>
 </html>
 `;
