@@ -320,3 +320,13 @@ html:not([dir="rtl"]) .back-ic{transform:scaleX(-1)}
 @media (max-width:640px){.legal{padding:28px 0 64px}.legal-body h2{font-size:21px}.legal-cta{display:inline-flex!important}}
 .bar-actions .legal-cta{display:inline-flex!important}
 @media (max-width:640px){.foot-cols{grid-template-columns:1fr 1fr}}
+
+/* contact */
+.contact{background:var(--paper);border-top:1px solid var(--stone)}
+.contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap);max-width:880px;margin:0 auto}
+.contact-card p{flex:1}
+.contact-mail{font-weight:600;font-size:17px;color:var(--olive-dk);text-decoration:none;margin-top:6px;word-break:break-all}
+.contact-mail:hover{text-decoration:underline;text-underline-offset:4px}
+.contact-member{margin-top:32px;text-align:center;color:var(--body);display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 10px}
+@media (max-width:640px){.contact-grid{grid-template-columns:1fr}}
+.contact-mail{align-self:flex-start}

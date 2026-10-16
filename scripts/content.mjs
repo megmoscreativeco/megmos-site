@@ -35,7 +35,7 @@ export const en = {
   seoDesc: "Create property descriptions, social media content, email campaigns, and more with MABS, an AI-powered marketing toolkit built for real estate professionals.",
   skip: "Skip to content",
   brandSub: "Megmos AI Brand Studio",
-  nav: { label: "Main", product: "Product", how: "How It Works", features: "Features", faq: "FAQ", login: "Log In", start: "Get Started", menu: "Menu", close: "Close menu" },
+  nav: { label: "Main", product: "Product", how: "How It Works", features: "Features", faq: "FAQ", contact: "Contact", login: "Log In", start: "Get Started", menu: "Menu", close: "Close menu" },
 
   hero: {
     eyebrow: "AI-powered real estate marketing",
@@ -197,6 +197,17 @@ export const en = {
     ],
   },
 
+  contact: {
+    eyebrow: "Contact",
+    title: "Talk to Us",
+    sub: "Questions about MABS, a demo for your team, or a partnership? Email us. We usually reply within 2 business days.",
+    cards: [
+      { icon: "mail", title: "General and support", desc: "Product questions, help with your account, or working with your brokerage.", email: "support@megmos.com" },
+      { icon: "check", title: "Privacy", desc: "Data requests, such as access, export or deletion, and privacy questions.", email: "privacy@megmos.com" },
+    ],
+    member: "Already using MABS? You can also send a message from Support inside the app.",
+    memberLink: "Open Support",
+  },
   final: {
     title: "Make Every Piece of Your Marketing Work Together.",
     sub: "Bring more structure to your real estate marketing with AI-powered tools built around the way you work.",
@@ -218,7 +229,7 @@ export const ar = {
   seoDesc: "أنشئ أوصاف العقارات ومحتوى التواصل الاجتماعي وحملات البريد الإلكتروني وأكثر مع MABS، مجموعة أدوات تسويق بالذكاء الاصطناعي مصممة لمحترفي العقارات.",
   skip: "انتقل إلى المحتوى",
   brandSub: "Megmos AI Brand Studio",
-  nav: { label: "القائمة الرئيسية", product: "المنتج", how: "كيف يعمل", features: "المزايا", faq: "الأسئلة الشائعة", login: "تسجيل الدخول", start: "ابدأ الآن", menu: "القائمة", close: "إغلاق القائمة" },
+  nav: { label: "القائمة الرئيسية", product: "المنتج", how: "كيف يعمل", features: "المزايا", faq: "الأسئلة الشائعة", contact: "تواصل معنا", login: "تسجيل الدخول", start: "ابدأ الآن", menu: "القائمة", close: "إغلاق القائمة" },
 
   hero: {
     eyebrow: "تسويق عقاري بالذكاء الاصطناعي",
@@ -380,6 +391,17 @@ export const ar = {
     ],
   },
 
+  contact: {
+    eyebrow: "تواصل معنا",
+    title: "تحدّث إلينا",
+    sub: "لديك أسئلة عن MABS، أو تريد عرضًا لفريقك، أو شراكة؟ راسلنا بالبريد الإلكتروني، وعادةً نرد خلال يومي عمل.",
+    cards: [
+      { icon: "mail", title: "الاستفسارات العامة والدعم", desc: "أسئلة عن المنتج، أو مساعدة في حسابك، أو العمل مع وكالتك.", email: "support@megmos.com" },
+      { icon: "check", title: "الخصوصية", desc: "طلبات البيانات مثل الاطلاع أو التصدير أو الحذف، وأسئلة الخصوصية.", email: "privacy@megmos.com" },
+    ],
+    member: "تستخدم MABS بالفعل؟ يمكنك أيضًا إرسال رسالة من صفحة الدعم داخل التطبيق.",
+    memberLink: "افتح صفحة الدعم",
+  },
   final: {
     title: "اجعل كل جزء من تسويقك يعمل معًا.",
     sub: "أضف مزيدًا من التنظيم إلى تسويقك العقاري بأدوات ذكاء اصطناعي مبنية حول طريقة عملك.",

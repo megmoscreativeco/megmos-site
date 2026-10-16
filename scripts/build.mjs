@@ -137,7 +137,7 @@ function footerHtml(t) {
       <div><h3>${esc(t.footer.navTitle)}</h3><a href="${t.path}#product">${esc(t.nav.product)}</a><a href="${t.path}#features">${esc(t.nav.features)}</a><a href="${t.path}#how">${esc(t.nav.how)}</a><a href="${t.path}#faq">${esc(t.nav.faq)}</a></div>
       <div><h3>${esc(t.footer.accountTitle)}</h3><a href="${LOGIN}">${esc(t.nav.login)}</a><a href="${SIGNUP}">${esc(t.nav.start)}</a><a href="${APP}/support">${esc(t.footer.support)}</a></div>
       <div><h3>${esc(L.labels.legal)}</h3><a href="${base}privacy/">${esc(L.privacy.title)}</a><a href="${base}terms/">${esc(L.terms.title)}</a><a href="${base}cookies/">${esc(L.cookies.title)}</a></div>
-      <div><h3>${esc(t.footer.companyTitle)}</h3><span>${esc(t.footer.company)}</span><a href="${t.other}" hreflang="${otherLang}" lang="${otherLang}">${esc(t.otherLabel)}</a></div>
+      <div><h3>${esc(t.footer.companyTitle)}</h3><span>${esc(t.footer.company)}</span><a href="${t.path}#contact">${esc(t.nav.contact)}</a><a href="mailto:support@megmos.com" dir="ltr">support@megmos.com</a><a href="${t.other}" hreflang="${otherLang}" lang="${otherLang}">${esc(t.otherLabel)}</a></div>
     </nav>
   </div>
   <div class="wrap foot-base"><span dir="ltr">© ${new Date().getFullYear()} Megmos LLC · Megmos Creative Co.</span></div>
@@ -278,6 +278,7 @@ function page(t) {
       <a href="#how">${esc(t.nav.how)}</a>
       <a href="#features">${esc(t.nav.features)}</a>
       <a href="#faq">${esc(t.nav.faq)}</a>
+      <a href="#contact">${esc(t.nav.contact)}</a>
       <div class="nav-mobile-actions">
         <a class="btn btn-outline" href="${LOGIN}">${esc(t.nav.login)}</a>
         <a class="btn btn-primary" href="${SIGNUP}">${esc(t.nav.start)}</a>
@@ -466,6 +467,21 @@ function page(t) {
       <a class="text-link" href="#product">${esc(t.final.cta2)} ${icon("arrow", 16, "flip")}</a>
     </div>
     <p class="note">${icon("check", 16)} ${esc(t.final.plan)}</p>
+  </div>
+</section>
+
+<!-- 12b. Contact -->
+<section class="section contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <p class="eyebrow">${esc(t.contact.eyebrow)}</p>
+      <h2 id="contact-title">${esc(t.contact.title)}</h2>
+      <p class="sub">${esc(t.contact.sub)}</p>
+    </div>
+    <div class="contact-grid">
+      ${t.contact.cards.map((c) => `<article class="card contact-card reveal">${icon(c.icon, 22, "card-ic")}<h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p><a class="contact-mail" href="mailto:${c.email}" dir="ltr">${esc(c.email)}</a></article>`).join("\n      ")}
+    </div>
+    <p class="contact-member reveal">${esc(t.contact.member)} <a class="text-link" href="${APP}/support">${esc(t.contact.memberLink)} ${icon("arrow", 16, "flip")}</a></p>
   </div>
 </section>
 
