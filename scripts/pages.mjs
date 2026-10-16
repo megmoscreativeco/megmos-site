@@ -235,3 +235,41 @@ export const pages = {
     nav: { about: "من نحن" },
   },
 };
+
+// Chat assistant widget strings (megmos.com, all pages).
+export const chatStrings = {
+  en: {
+    open: "Ask MABS",
+    title: "MABS Assistant",
+    subtitle: "Answers about MABS, plans and support",
+    close: "Close chat",
+    intro: "Hi! I can answer questions about MABS: what it creates, how it works, plans, languages and privacy. What would you like to know?",
+    suggestions: ["What can MABS create?", "Is there a free plan?", "Does it work in Arabic?"],
+    placeholder: "Type your question…",
+    send: "Send",
+    thinking: "Thinking…",
+    error: "Sorry, I couldn't answer right now. Please try again, or use the contact form.",
+    rate: "You're sending messages quickly. Please wait a minute and try again.",
+    note: "AI assistant: answers can be wrong. Don't share personal or sensitive information.",
+    privacy: "Privacy",
+    contact: "Contact us",
+    restart: "New chat",
+  },
+  ar: {
+    open: "اسأل MABS",
+    title: "مساعد MABS",
+    subtitle: "إجابات عن MABS والباقات والدعم",
+    close: "إغلاق المحادثة",
+    intro: "مرحبًا! يمكنني الإجابة عن أسئلتك حول MABS: ما الذي يُنشئه، وكيف يعمل، والباقات، واللغات، والخصوصية. ماذا تودّ أن تعرف؟",
+    suggestions: ["ماذا يمكن أن يُنشئ MABS؟", "هل توجد باقة مجانية؟", "هل يعمل بالعربية؟"],
+    placeholder: "اكتب سؤالك…",
+    send: "إرسال",
+    thinking: "جارٍ التفكير…",
+    error: "عذرًا، تعذّرت الإجابة الآن. يُرجى المحاولة مرة أخرى، أو استخدام نموذج التواصل.",
+    rate: "ترسل رسائل بسرعة. يُرجى الانتظار دقيقة ثم المحاولة مرة أخرى.",
+    note: "مساعد بالذكاء الاصطناعي: قد تكون الإجابات غير دقيقة. لا تشارك معلومات شخصية أو حساسة.",
+    privacy: "الخصوصية",
+    contact: "تواصل معنا",
+    restart: "محادثة جديدة",
+  },
+};

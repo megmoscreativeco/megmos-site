@@ -3,7 +3,7 @@
 import { writeFileSync, mkdirSync } from "node:fs";
 import { en, ar, APP, SITE } from "./content.mjs";
 import { legal, LEGAL_UPDATED } from "./legal.mjs";
-import { pages, COMPANY } from "./pages.mjs";
+import { pages, COMPANY, chatStrings } from "./pages.mjs";
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const br = (s) => esc(s).replace(/\n/g, "<br>");
@@ -142,7 +142,9 @@ function footerHtml(t) {
     </nav>
   </div>
   <div class="wrap foot-base"><span dir="ltr">© ${new Date().getFullYear()} Megmos LLC · Megmos Creative Co.</span></div>
-</footer>`;
+</footer>
+<div id="mabs-chat" data-endpoint="${APP}/api/v1/chat" data-locale="${t.lang}" data-privacy="${base}privacy/" data-contact="${base}contact/"><script type="application/json" class="mc-i18n">${JSON.stringify(chatStrings[t.lang])}</script></div>
+<script src="/chat.js" defer></script>`;
 }
 
 /* ---------- legal pages ---------- */
