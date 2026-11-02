@@ -31,6 +31,8 @@ const P = {
   sparkle: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="m6 6 2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
   copy: '<rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/>',
   menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+  flyer: '<rect x="5" y="3" width="14" height="18" rx="1"/><path d="M5 12h14"/><path d="m8 9 2.5-2.5L13 9l1.5-1.5L16 9"/><path d="M8 15h8M8 18h5"/>',
+  palette: '<path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.6-.9 1.2-1.8-.5-1 .2-2.2 1.3-2.2H17a4 4 0 0 0 4-4c0-5.5-4-10-9-10z"/><circle cx="7.5" cy="11.5" r="1"/><circle cx="10.5" cy="7.5" r="1"/><circle cx="15" cy="8" r="1"/>',
 };
 const icon = (name, size = 20, cls = "") =>
   `<svg class="ic ${cls}" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[name]}</svg>`;
@@ -90,6 +92,8 @@ function featurePreview(t, kind) {
     case "market": return `<div class="pv pv-stats">${pv.market.map(([l, v]) => `<div><b>${v}</b><span>${esc(l)}</span></div>`).join("")}<em>${esc(pv.marketNote)}</em></div>`;
     case "video": return `<div class="pv pv-lines">${pv.videoLines.map((l) => `<span>${esc(l)}</span>`).join("")}</div>`;
     case "web": return `<div class="pv pv-tags">${pv.web.map((s) => `<span>${esc(s)}</span>`).join("")}</div>`;
+    case "design": return `<div class="pv pv-tags">${pv.design.map((s, i) => `<span class="${i === 0 ? "on" : ""}">${esc(s)}</span>`).join("")}</div>`;
+    case "brand": return `<div class="pv pv-swatch"><i></i><i></i><i></i><i></i><div class="pv-tags">${pv.brand.map((s) => `<span>${esc(s)}</span>`).join("")}</div></div>`;
     case "lang": return `<div class="pv pv-lang"><span dir="ltr" lang="en">${esc(pv.langEn)}</span><span dir="rtl" lang="ar">${esc(pv.langAr)}</span></div>`;
     default: return "";
   }
@@ -802,6 +806,7 @@ ${headerHtml(t, t.other)}
     <div class="grid g4 features">
       ${t.features.cards.map((c) => `<article class="card feature reveal">
         <div class="feature-top">${icon(c.icon, 20, "tile")}<h3>${esc(c.name)}</h3></div>
+        <span class="plan-tag${c.plan === "pro" ? " pro" : ""}">${esc(t.features.plans[c.plan])}</span>
         <p>${esc(c.desc)}</p>
         <div class="feature-pv" aria-hidden="true">${featurePreview(t, c.preview)}</div>
       </article>`).join("\n      ")}

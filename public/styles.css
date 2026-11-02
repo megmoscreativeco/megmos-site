@@ -139,6 +139,14 @@ html[dir="rtl"] .pillar{padding:36px 0 8px 32px}
 .feature-top h3{font-size:16.5px}
 .tile{box-sizing:content-box;padding:9px;border-radius:6px;background:var(--paper);border:1px solid var(--stone);color:var(--olive)}
 .feature-pv{margin-top:auto;padding-top:6px}
+/* Plan tag on each feature (2026-11-02): what the Free plan includes and what needs Pro. */
+.plan-tag{align-self:flex-start;font-size:10.5px;letter-spacing:var(--track);text-transform:uppercase;padding:3px 8px;border:1px solid var(--sage);border-radius:999px;color:var(--olive);background:var(--white)}
+.plan-tag.pro{background:var(--ink);border-color:var(--ink);color:#fff}
+html[lang="ar"] .plan-tag{letter-spacing:0}
+.pv-swatch{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pv-swatch i{width:18px;height:18px;border-radius:50%;border:1px solid var(--stone)}
+.pv-swatch i:nth-child(1){background:#111}.pv-swatch i:nth-child(2){background:#c5a33d}.pv-swatch i:nth-child(3){background:#e9e6df}.pv-swatch i:nth-child(4){background:#fff}
+.pv-swatch .pv-tags{flex-basis:100%;margin-top:4px}
 .pv{border:1px solid var(--stone);border-radius:6px;background:var(--paper);padding:12px;font-size:12.5px;line-height:1.55;color:var(--body);min-height:92px}
 .pv-text{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start}
 .pv-text p{flex-basis:100%;margin-top:4px}
