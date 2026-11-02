@@ -47,7 +47,7 @@ export const en = {
   },
 
   app: {
-    navItems: ["AI Content", "My Projects", "Content Library", "Brand Context"],
+    navItems: ["AI Content", "Design Studio", "My Projects", "Brand"],
     workspace: "AI Content",
     sections: [
       ["Property", ["MLS Description", "Luxury Listing", "Listing Campaign"]],
@@ -90,7 +90,7 @@ export const en = {
     sub: "Choose the marketing task, provide the relevant details, and use AI to develop content tailored to your real estate business.",
     // Each card's plan matches the app (2026-11-02): Starter generators are on the Free plan;
     // Professional generators, Design Studio and the Brand Kit need the Pro plan.
-    plans: { free: "Free plan", pro: "Pro plan", all: "Every plan" },
+    plans: { free: "Free plan", pro: "Paid plans", all: "Every plan" },
     cards: [
       { icon: "home", plan: "free", name: "Listing Descriptions", desc: "MLS-ready and luxury listing descriptions, headlines and highlights, written from the property facts and your brand voice, without invented features.", preview: "mls" },
       { icon: "chat", plan: "free", name: "Social Media and Video Scripts", desc: "Instagram captions, posts for Facebook, LinkedIn and X, video hooks, reel storyboards and timed video scripts.", preview: "social" },
@@ -191,14 +191,14 @@ export const en = {
     items: [
       ["What is MABS?", "MABS, or Megmos AI Brand Studio, is an AI-powered marketing and growth toolkit designed for real estate professionals. It provides specialized generators for property descriptions, social media content, emails, market updates, video scripts, blog posts, website pages and more."],
       ["Who can use MABS?", "Independent real estate agents, luxury agents, real estate teams, and brokers looking for a more structured approach to marketing content creation."],
-      ["What can I create with MABS?", "Property and luxury listing descriptions, listing campaigns, flyer copy, Instagram captions, social posts, video scripts, market updates, neighborhood guides, blog posts, marketing emails, client follow-ups, lead nurture sequences, listing presentations, an agent bio and your website pages. Some generators are part of paid plans."],
+      ["What can I create with MABS?", "Written content: property and luxury listing descriptions, listing headlines, listing campaigns, flyer copy, Instagram captions, social posts, video hooks, reel storyboards, video scripts, video ad scripts, social images, market updates, neighborhood guides, blog posts, marketing emails, client follow-ups, lead nurture sequences, listing presentations, an agent bio and your website pages. Designs in your brand: print-ready flyers and brochures, social media templates, lead-generation pieces and market reports in the Design Studio, and a Brand Kit with brand guidelines, business cards, email signatures, yard signs and more. Some generators, the Design Studio and the Brand Kit are part of paid plans."],
       ["How does MABS work?", "Set up your Brand Context once. Choose a generator, provide the requested information, and generate content that you can review, edit and adapt to your marketing needs."],
       ["Do I need technical experience?", "No. MABS is form-based: you fill in the fields a generator asks for and click Generate. There is nothing to install."],
       ["Does MABS automatically publish content to my social media accounts?", "No. MABS creates the content; you review it and publish it wherever you choose. It does not connect to or post on your social accounts."],
       ["Does MABS invent property details?", "No. Generators use only the facts you provide, and numbers are copied exactly as you enter them. If a detail is missing, it is left out rather than made up."],
       ["Can I use MABS for luxury real estate?", "Yes. MABS includes a Luxury Listing Description generator for a more refined tone, still built only from your property facts."],
       ["Which languages does MABS support?", "English and Arabic, for both the interface and the content you generate."],
-      ["How can I get started?", "Create a free account. The free plan includes 10 AI generations a month and the Starter generators, with no credit card required. Paid plans with more generators and higher limits are coming soon."],
+      ["How can I get started?", "Create a free account. The free plan includes 10 AI generations a month and the Starter generators, with no credit card required. Paid plans with more generators, the Design Studio, the Brand Kit and higher limits are coming soon."],
     ],
   },
 
@@ -246,7 +246,7 @@ export const ar = {
   },
 
   app: {
-    navItems: ["المحتوى بالذكاء الاصطناعي", "مشاريعي", "مكتبة المحتوى", "سياق العلامة"],
+    navItems: ["المحتوى الذكي", "استوديو التصميم", "مشاريعي", "العلامة التجارية"],
     workspace: "المحتوى بالذكاء الاصطناعي",
     sections: [
       ["العقارات", ["وصف MLS", "إدراج فاخر", "حملة الإدراج"]],
@@ -287,7 +287,7 @@ export const ar = {
     eyebrow: "المزايا",
     title: "كل شيء يبدأ بما تحتاج إلى إنشائه.",
     sub: "اختر المهمة التسويقية، وأدخل التفاصيل المطلوبة، ودع الذكاء الاصطناعي يطوّر محتوى مخصصًا لعملك العقاري.",
-    plans: { free: "الخطة المجانية", pro: "خطة Pro", all: "كل الخطط" },
+    plans: { free: "الخطة المجانية", pro: "الخطط المدفوعة", all: "كل الخطط" },
     cards: [
       { icon: "home", plan: "free", name: "أوصاف الإدراجات", desc: "أوصاف إدراج جاهزة لـ MLS وأوصاف فاخرة وعناوين وأبرز المزايا، تُكتب من بيانات العقار وأسلوب علامتك، دون مزايا مختلقة.", preview: "mls" },
       { icon: "chat", plan: "free", name: "التواصل الاجتماعي ونصوص الفيديو", desc: "تعليقات Instagram ومنشورات Facebook وLinkedIn وX وافتتاحيات الفيديو ولوحات المقاطع القصيرة ونصوص فيديو موقّتة.", preview: "social" },
@@ -388,14 +388,14 @@ export const ar = {
     items: [
       ["ما هو MABS؟", "MABS، أو Megmos AI Brand Studio، مجموعة أدوات تسويق ونمو بالذكاء الاصطناعي مصممة لمحترفي العقارات. يوفر مولّدات متخصصة لأوصاف العقارات ومحتوى التواصل الاجتماعي ورسائل البريد وتحديثات السوق ونصوص الفيديو ومقالات المدونة وصفحات المواقع وغيرها."],
       ["من يمكنه استخدام MABS؟", "وكلاء العقارات المستقلون، ووكلاء العقارات الفاخرة، وفرق العقارات، والوسطاء الذين يبحثون عن نهج أكثر تنظيمًا لإنشاء المحتوى التسويقي."],
-      ["ماذا يمكنني أن أنشئ مع MABS؟", "أوصاف العقارات والإدراجات الفاخرة، وحملات الإدراج، ونصوص النشرات، وتعليقات Instagram، والمنشورات الاجتماعية، ونصوص الفيديو، وتحديثات السوق، وأدلة الأحياء، ومقالات المدونة، ورسائل التسويق، ومتابعة العملاء، وسلاسل رعاية العملاء المحتملين، وعروض الإدراج، ونبذة الوكيل، وصفحات موقعك. بعض المولّدات ضمن الباقات المدفوعة."],
+      ["ماذا يمكنني أن أنشئ مع MABS؟", "محتوى مكتوب: أوصاف العقارات والإدراجات الفاخرة، وعناوين الإدراجات، وحملات الإدراج، ونصوص النشرات، وتعليقات Instagram، والمنشورات الاجتماعية، وافتتاحيات الفيديو، ولوحات المقاطع القصيرة، ونصوص الفيديو، ونصوص إعلانات الفيديو، والصور الاجتماعية، وتحديثات السوق، وأدلة الأحياء، ومقالات المدونة، ورسائل التسويق، ومتابعة العملاء، وسلاسل رعاية العملاء المحتملين، وعروض الإدراج، ونبذة الوكيل، وصفحات موقعك. وتصاميم بهويتك: نشرات وكتيبات جاهزة للطباعة، وقوالب للتواصل الاجتماعي، ومواد لجذب العملاء، وتقارير السوق في استوديو التصميم، وحزمة هوية تضم دليل الهوية وبطاقات العمل وتواقيع البريد ولافتات البيع والمزيد. بعض المولّدات واستوديو التصميم وحزمة الهوية ضمن الباقات المدفوعة."],
       ["كيف يعمل MABS؟", "جهّز سياق علامتك مرة واحدة. اختر مولّدًا، وأدخل المعلومات المطلوبة، وأنشئ محتوى يمكنك مراجعته وتعديله وتكييفه مع احتياجاتك التسويقية."],
       ["هل أحتاج إلى خبرة تقنية؟", "لا. يعتمد MABS على النماذج: تملأ الحقول التي يطلبها المولّد ثم تنقر «إنشاء». لا شيء يحتاج إلى تثبيت."],
       ["هل ينشر MABS المحتوى تلقائيًا على حساباتي في وسائل التواصل؟", "لا. ينشئ MABS المحتوى، وأنت تراجعه وتنشره حيث تشاء. لا يتصل بحساباتك في وسائل التواصل ولا ينشر عليها."],
       ["هل يختلق MABS تفاصيل عن العقار؟", "لا. تستخدم المولّدات الوقائع التي تقدّمها فقط، وتُنقل الأرقام كما أدخلتها تمامًا. وإذا غابت معلومة، تُترك بدلًا من اختلاقها."],
       ["هل يمكنني استخدام MABS للعقارات الفاخرة؟", "نعم. يتضمن MABS مولّدًا لأوصاف الإدراجات الفاخرة بأسلوب أكثر رقيًا، مبنيًا على بيانات عقارك فقط."],
       ["ما اللغات التي يدعمها MABS؟", "العربية والإنجليزية، للواجهة وللمحتوى الذي تنشئه."],
-      ["كيف أبدأ؟", "أنشئ حسابًا مجانيًا. تتضمن الباقة المجانية 10 عمليات إنشاء شهريًا ومولّدات Starter، دون الحاجة إلى بطاقة ائتمان. والباقات المدفوعة بمولّدات أكثر وحدود أعلى قادمة قريبًا."],
+      ["كيف أبدأ؟", "أنشئ حسابًا مجانيًا. تتضمن الباقة المجانية 10 عمليات إنشاء شهريًا ومولّدات Starter، دون الحاجة إلى بطاقة ائتمان. والباقات المدفوعة بمولّدات أكثر واستوديو التصميم وحزمة الهوية وحدود أعلى قادمة قريبًا."],
     ],
   },
 

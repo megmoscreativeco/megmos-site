@@ -1,6 +1,7 @@
 // How It Works page for megmos.com, EN and AR.
-// Every claim is checked against the MABS app (2026-10-16):
-// - 23 active generators; 9 Starter (free plan), 14 Professional (paid plans, not yet on sale).
+// Every claim is checked against the MABS app (2026-10-16, updated 2026-11-02):
+// - 27 active generators; 11 Starter (free plan), 16 Professional (paid plans, not yet on sale).
+// - Design Studio, Image Studio, the Brand Kit and importing facts from a document need a paid plan.
 // - Brand Context (Settings) is optional and available to every generator template;
 //   form input always overrides it. Generation works with or without a project.
 // - Output editor: edit, copy, save to project (Content Library), regenerate, repurpose.
@@ -31,7 +32,7 @@ export const how = {
     steps: [
       {
         h: "Start with Your Business",
-        body: "Save your business details once in Brand Context, inside Settings. MABS makes them available to its generators, so you don't retype your name, voice or service areas for every piece. Brand Context is optional: you can generate content without completing it, and add to it at any time.",
+        body: "Save your business details once in Brand Context, inside Settings. MABS makes them available to its generators, so you don't retype your name, voice or service areas for every piece. Brand Context is optional: you can generate content without completing it, and add to it at any time. Your logo, colours and fonts go on the Brand page, where your designs pick them up.",
         listTitle: "Brand Context can include",
         list: ["Your business or agency name and brokerage", "Your services and a short company description", "Your target audience", "Your brand voice and style", "Your service areas", "Contact details and social profiles"],
         micro: "Give MABS the context it needs. The more relevant the information, the better the starting point for your marketing content.",
@@ -45,9 +46,9 @@ export const how = {
       },
       {
         h: "Tell Us About the Property or Campaign",
-        body: "Complete a short, structured form. Required fields are marked, and the rest are optional. When you work inside a project, the property facts you saved there are ready to use.",
+        body: "Complete a short, structured form. Required fields are marked, and the rest are optional. When you work inside a project, the property facts you saved there are ready to use. On paid plans, you can also import a property's facts from a listing PDF or a photo of a document, then check them before saving.",
         listTitle: "Depending on the generator, fields can include",
-        list: ["Property address and type", "Bedrooms, bathrooms and size", "Key or standout features", "Listing price, saved in your project", "Post type, key message and call to action", "Tone, and a focus keyword for website pages"],
+        list: ["Property address and type", "Bedrooms, bathrooms and size", "Key or standout features", "Finishes and materials you tick, such as marble floors or a wine cellar", "Listing price, saved in your project", "Post type, key message and call to action", "Tone, and a focus keyword for website pages"],
         note: "Fields differ by generator. MABS never fills in property facts you didn't provide: missing details are left out.",
         micro: "Provide the facts that matter. MABS uses the information you supply to prepare a relevant first draft, while leaving you in control of what gets included.",
       },
@@ -87,7 +88,7 @@ export const how = {
 
     createEyebrow: "What you can create",
     createTitle: "One Platform. Different Marketing Needs.",
-    createSub: "Generators are grouped by marketing task. The free plan includes the Starter generators; the rest will come with paid plans.",
+    createSub: "Tools are grouped by marketing task. The free plan includes the Starter generators; the rest, with the Design Studio and the Brand Kit, will come with paid plans.",
     legendFree: "Included in the free plan",
     legendPaid: "Paid plans, coming soon",
     exampleLabel: "Example output",
@@ -101,7 +102,7 @@ export const how = {
       {
         icon: "chat", title: "Social Media Content",
         desc: "Prepare captions, posts and short video scripts, plus longer local and market content.",
-        gens: [["Instagram Caption", FREE], ["Social Post", FREE], ["Video Script", FREE], ["Market Update", PAID], ["Neighborhood Guide", PAID], ["Blog Post", PAID]],
+        gens: [["Instagram Caption", FREE], ["Social Post", FREE], ["Video Hooks", FREE], ["Reels Storyboard", FREE], ["Video Script", FREE], ["Social Image", PAID], ["Video Ads", PAID], ["Market Update", PAID], ["Neighborhood Guide", PAID], ["Blog Post", PAID]],
         example: "Waterfront mornings at 123 Harbor Lane. 4 bedrooms, 3.5 baths and a pool terrace. Message me to book a private showing.",
       },
       {
@@ -116,8 +117,14 @@ export const how = {
         gens: [["Agent Bio", FREE], ["Website pages (7)", PAID], ["Website Kit", PAID]],
         example: "SEO title: Harbor District Homes | Avery Lane, Harbor & Stone Realty",
       },
+      {
+        icon: "flyer", title: "Designs and Brand Kit",
+        desc: "Print-ready flyers and brochures, social media templates, lead-generation pieces and market reports in the Design Studio, branded images in the Image Studio, and a Brand Kit with brand guidelines, business cards, email signatures, yard signs, stationery and more, all in your logo, colours and fonts.",
+        gens: [["Design Studio", PAID], ["Image Studio", PAID], ["Brand Kit", PAID]],
+        example: "Just Listed flyer · 123 Harbor Lane · your logo, colours and fonts, with a matching social post and story",
+      },
     ],
-    createNote: "Examples use a fictional agent and property. MABS writes copy only: it does not host, build or publish websites.",
+    createNote: "Examples use a fictional agent and property. MABS writes copy and creates designs for you to download: it does not host, build or publish websites.",
 
     exEyebrow: "Illustrative example",
     exTitle: "See How It Works in Practice",
@@ -166,7 +173,7 @@ export const how = {
     faq: [
       ["What is MABS?", "MABS, short for Megmos AI Brand Studio, is an AI-powered marketing platform focused on helping real estate professionals create content through specialized generators and structured workflows."],
       ["Do I need to provide all my business information first?", "No. Start with the information the generator you choose asks for. Adding your Brand Context in Settings can make results more specific, and you can do that at any time."],
-      ["Can I use MABS for different marketing tasks?", "Yes. MABS has specialized generators for property descriptions, social content, email marketing and website copy. The free plan includes the Starter generators; the others will come with paid plans, which are coming soon."],
+      ["Can I use MABS for different marketing tasks?", "Yes. MABS has specialized generators for property descriptions, social content, email marketing and website copy, and a Design Studio and Brand Kit for flyers, brochures and brand materials. The free plan includes the Starter generators; the others, with the Design Studio and the Brand Kit, will come with paid plans, which are coming soon."],
       ["Can I publish the generated content immediately?", "Generated content should be reviewed and verified before publication. Check all property facts, contact details, claims, and other important information."],
       ["Does MABS automatically publish content to my website or social media?", "No. MABS generates content for you to review, and you copy it wherever you need it. It does not publish to websites or social media, or connect to other platforms."],
       ["Can I generate content in Arabic and English?", "Yes. MABS works in English and Arabic, with a right-to-left layout for Arabic, and generators write content in the language you're using in the app."],
@@ -199,7 +206,7 @@ export const how = {
     steps: [
       {
         h: "ابدأ بأعمالك",
-        body: "احفظ تفاصيل أعمالك مرة واحدة في «سياق العلامة التجارية» داخل الإعدادات. يتيحها MABS لمولّداته، فلا تحتاج إلى إعادة كتابة اسمك وأسلوبك ومناطق خدمتك مع كل محتوى. سياق العلامة التجارية اختياري: يمكنك إنشاء المحتوى دون إكماله، والإضافة إليه في أي وقت.",
+        body: "احفظ تفاصيل أعمالك مرة واحدة في «سياق العلامة التجارية» داخل الإعدادات. يتيحها MABS لمولّداته، فلا تحتاج إلى إعادة كتابة اسمك وأسلوبك ومناطق خدمتك مع كل محتوى. سياق العلامة التجارية اختياري: يمكنك إنشاء المحتوى دون إكماله، والإضافة إليه في أي وقت. أما شعارك وألوانك وخطوطك فتُحفظ في صفحة العلامة التجارية، ومنها تأخذها تصاميمك.",
         listTitle: "يمكن أن يتضمن سياق العلامة التجارية",
         list: ["اسم نشاطك أو وكالتك والوساطة التي تعمل معها", "خدماتك ووصفًا مختصرًا لشركتك", "جمهورك المستهدف", "أسلوب علامتك التجارية وطابعها", "مناطق خدمتك", "بيانات التواصل والحسابات الاجتماعية"],
         micro: "امنح MABS السياق الذي يحتاجه. كلما كانت المعلومات أكثر صلة، كانت نقطة البداية لمحتواك التسويقي أفضل.",
@@ -213,9 +220,9 @@ export const how = {
       },
       {
         h: "أخبرنا عن العقار أو الحملة",
-        body: "أكمل نموذجًا قصيرًا ومنظمًا. الحقول المطلوبة موضّحة، والباقي اختياري. وعندما تعمل داخل مشروع، تكون بيانات العقار التي حفظتها فيه جاهزة للاستخدام.",
+        body: "أكمل نموذجًا قصيرًا ومنظمًا. الحقول المطلوبة موضّحة، والباقي اختياري. وعندما تعمل داخل مشروع، تكون بيانات العقار التي حفظتها فيه جاهزة للاستخدام. وفي الباقات المدفوعة يمكنك أيضًا استيراد بيانات العقار من ملف PDF للإدراج أو من صورة مستند، ثم مراجعتها قبل الحفظ.",
         listTitle: "بحسب المولّد، قد تشمل الحقول",
-        list: ["عنوان العقار ونوعه", "عدد غرف النوم والحمامات والمساحة", "المزايا الرئيسية أو البارزة", "سعر العرض، المحفوظ في مشروعك", "نوع المنشور والرسالة الرئيسية والدعوة إلى الإجراء", "النبرة، وكلمة مفتاحية لصفحات الموقع"],
+        list: ["عنوان العقار ونوعه", "عدد غرف النوم والحمامات والمساحة", "المزايا الرئيسية أو البارزة", "التشطيبات والمواد التي تختارها، مثل أرضيات الرخام أو قبو النبيذ", "سعر العرض، المحفوظ في مشروعك", "نوع المنشور والرسالة الرئيسية والدعوة إلى الإجراء", "النبرة، وكلمة مفتاحية لصفحات الموقع"],
         note: "تختلف الحقول من مولّد إلى آخر. لا يضيف MABS أبدًا بيانات عقار لم تقدّمها: التفاصيل الناقصة تُترك ببساطة.",
         micro: "قدّم الحقائق المهمة. يستخدم MABS المعلومات التي تقدّمها لإعداد مسودة أولى مناسبة، مع إبقاء القرار بيدك فيما يُضاف إليها.",
       },
@@ -255,7 +262,7 @@ export const how = {
 
     createEyebrow: "ما يمكنك إنشاؤه",
     createTitle: "منصة واحدة. احتياجات تسويقية متعددة.",
-    createSub: "المولّدات مجمّعة حسب مهمة التسويق. تتضمن الباقة المجانية مولّدات Starter، وستتوفر البقية مع الباقات المدفوعة.",
+    createSub: "الأدوات مجمّعة حسب مهمة التسويق. تتضمن الباقة المجانية مولّدات Starter، وستتوفر البقية، مع استوديو التصميم وحزمة الهوية، في الباقات المدفوعة.",
     legendFree: "ضمن الباقة المجانية",
     legendPaid: "الباقات المدفوعة، قريبًا",
     exampleLabel: "مثال على الناتج",
@@ -269,7 +276,7 @@ export const how = {
       {
         icon: "chat", title: "محتوى وسائل التواصل",
         desc: "جهّز التعليقات والمنشورات ونصوص الفيديو القصيرة، إضافة إلى محتوى أطول عن المنطقة والسوق.",
-        gens: [["تعليقات Instagram", FREE], ["منشورات التواصل الاجتماعي", FREE], ["نصوص الفيديو", FREE], ["تحديثات السوق", PAID], ["أدلة الأحياء", PAID], ["مقالات المدونة", PAID]],
+        gens: [["تعليقات Instagram", FREE], ["منشورات التواصل الاجتماعي", FREE], ["افتتاحيات الفيديو", FREE], ["لوحات المقاطع القصيرة", FREE], ["نصوص الفيديو", FREE], ["الصور الاجتماعية", PAID], ["إعلانات الفيديو", PAID], ["تحديثات السوق", PAID], ["أدلة الأحياء", PAID], ["مقالات المدونة", PAID]],
         example: "صباحات على الواجهة المائية في 123 هاربر لين. 4 غرف نوم و3.5 حمام وشرفة مسبح. راسلني لحجز معاينة خاصة.",
       },
       {
@@ -284,8 +291,14 @@ export const how = {
         gens: [["السيرة المهنية للوكيل", FREE], ["صفحات الموقع (7)", PAID], ["مجموعة الموقع الإلكتروني", PAID]],
         example: "عنوان SEO: منازل حي هاربر | أفيري لين، هاربر آند ستون العقارية",
       },
+      {
+        icon: "flyer", title: "التصاميم وحزمة الهوية",
+        desc: "نشرات وكتيبات جاهزة للطباعة، وقوالب للتواصل الاجتماعي، ومواد لجذب العملاء، وتقارير السوق في استوديو التصميم، وصور بهويتك في استوديو الصور، وحزمة هوية تضم دليل الهوية وبطاقات العمل وتواقيع البريد ولافتات البيع والقرطاسية والمزيد، كلها بشعارك وألوانك وخطوطك.",
+        gens: [["استوديو التصميم", PAID], ["استوديو الصور", PAID], ["حزمة الهوية", PAID]],
+        example: "نشرة «معروض حديثًا» · 123 هاربر لين · بشعارك وألوانك وخطوطك، مع منشور وقصة مطابقين",
+      },
     ],
-    createNote: "تستخدم الأمثلة وكيلًا وعقارًا خياليين. يكتب MABS النصوص فقط: لا يستضيف المواقع ولا يبنيها ولا ينشرها.",
+    createNote: "تستخدم الأمثلة وكيلًا وعقارًا خياليين. يكتب MABS النصوص وينشئ التصاميم لتنزّلها: لا يستضيف المواقع ولا يبنيها ولا ينشرها.",
 
     exEyebrow: "مثال توضيحي",
     exTitle: "شاهد كيف يعمل على أرض الواقع",
@@ -334,7 +347,7 @@ export const how = {
     faq: [
       ["ما هو MABS؟", "‏MABS، اختصار لـ Megmos AI Brand Studio، منصة تسويق مدعومة بالذكاء الاصطناعي تركّز على مساعدة المتخصصين في العقارات على إنشاء المحتوى عبر مولّدات متخصصة ومسارات عمل منظمة."],
       ["هل أحتاج إلى تقديم جميع معلومات أعمالي أولًا؟", "لا. ابدأ بالمعلومات التي يطلبها المولّد الذي تختاره. إضافة سياق علامتك التجارية في الإعدادات قد تجعل النتائج أكثر تحديدًا، ويمكنك فعل ذلك في أي وقت."],
-      ["هل يمكنني استخدام MABS لمهام تسويقية مختلفة؟", "نعم. يضم MABS مولّدات متخصصة لأوصاف العقارات ومحتوى وسائل التواصل والتسويق بالبريد الإلكتروني ونصوص المواقع. تتضمن الباقة المجانية مولّدات Starter، وستتوفر البقية مع الباقات المدفوعة التي ستُطلق قريبًا."],
+      ["هل يمكنني استخدام MABS لمهام تسويقية مختلفة؟", "نعم. يضم MABS مولّدات متخصصة لأوصاف العقارات ومحتوى وسائل التواصل والتسويق بالبريد الإلكتروني ونصوص المواقع، واستوديو تصميم وحزمة هوية للنشرات والكتيبات ومواد العلامة التجارية. تتضمن الباقة المجانية مولّدات Starter، وستتوفر البقية، مع استوديو التصميم وحزمة الهوية، في الباقات المدفوعة التي ستُطلق قريبًا."],
       ["هل يمكنني نشر المحتوى المُنشأ فورًا؟", "يجب مراجعة المحتوى المُنشأ والتحقق منه قبل النشر. تحقق من جميع بيانات العقار وتفاصيل التواصل والادعاءات وغيرها من المعلومات المهمة."],
       ["هل ينشر MABS المحتوى تلقائيًا على موقعي أو حساباتي الاجتماعية؟", "لا. يُنشئ MABS المحتوى لتراجعه، ثم تنسخه وتستخدمه أينما احتجت. لا ينشر على المواقع أو وسائل التواصل الاجتماعي، ولا يتصل بمنصات أخرى."],
       ["هل يمكنني إنشاء المحتوى بالعربية والإنجليزية؟", "نعم. يعمل MABS بالعربية والإنجليزية، مع تخطيط من اليمين إلى اليسار للعربية، وتكتب المولّدات المحتوى باللغة التي تستخدمها في التطبيق."],

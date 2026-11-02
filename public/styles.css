@@ -532,6 +532,7 @@ html[lang="ar"] .hw-micro{font-style:normal}
 .hw-dash{flex-shrink:0;width:12px;height:1px;background:var(--sage);margin-top:12px}
 .philosophy .principles p{color:#e3e4da;font-size:16px}
 .hw-cats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap)}
+.hw-cats>.hw-cat:last-child:nth-child(odd){grid-column:1/-1}
 .hw-cat{gap:14px}
 .hw-cat:hover{transform:none}
 .hw-sample{margin:6px 0 0;padding:16px;border-radius:var(--radius);background:var(--paper);border:1px solid var(--stone);display:flex;flex-direction:column;gap:6px}
