@@ -8,7 +8,7 @@ const ADDRESS = "30 N Gould St Ste R, Sheridan, WY 82801, USA";
 const PRIVACY = "privacy@megmos.com";
 const SUPPORT = "support@megmos.com";
 
-export const LEGAL_UPDATED = { en: "16 October 2026", ar: "16 أكتوبر 2026" };
+export const LEGAL_UPDATED = { en: "3 November 2026", ar: "3 نوفمبر 2026" };
 
 export const legal = {
   en: {
@@ -50,8 +50,11 @@ export const legal = {
         ["h2", "5. Who we share it with"],
         ["p", "We share personal data only with service providers that process it on our instructions:"],
         ["ul", [
-          "**Supabase:** database and sign-in, including account emails such as confirmations and password resets.",
+          "**Supabase:** database and sign-in.",
+          "**Namecheap (Private Email):** sends account emails, such as sign-up confirmations and password resets, from contact@megmos.com.",
+          "**Cloudflare (Turnstile):** checks that sign-ups and sign-ins come from a person and not a bot. It receives your IP address and technical details about your browser.",
           "**Anthropic:** AI content generation and replies from the MABS Assistant on megmos.com.",
+          "**Shotstack:** renders the videos you create in Video Studio from the photos, clips and texts you choose.",
           "**Vercel:** hosting of megmos.com and the MABS app.",
           "**Google Fonts:** delivers the fonts on megmos.com and receives your IP address when the page loads.",
           "**Stripe:** payment processing, only once paid plans launch.",
@@ -122,7 +125,7 @@ export const legal = {
         ["h2", "7. Our property"],
         ["p", "The Service, including its software, generator designs, prompts, templates, design and the MABS and Megmos names and logos, belongs to us or our licensors. These Terms do not give you any rights to them beyond using the Service."],
         ["h2", "8. Third-party services"],
-        ["p", "The Service relies on providers such as Supabase, Anthropic and Vercel. Their own terms apply to your use of their sites. We are not responsible for services we do not control."],
+        ["p", "The Service relies on providers such as Supabase, Anthropic, Vercel, Cloudflare, Shotstack and Namecheap. Their own terms apply to your use of their sites. We are not responsible for services we do not control."],
         ["h2", "9. Changes and availability"],
         ["p", "We are continually improving MABS and may add, change or remove features. We aim to keep the Service available, but we do not guarantee uninterrupted or error-free operation. We will give reasonable notice of changes that significantly reduce what a paid plan includes."],
         ["h2", "10. Ending your account"],
@@ -158,7 +161,9 @@ export const legal = {
           ["sb-…-auth-token", "Cookie (Supabase)", "Keeps you signed in securely (may be split into numbered parts)", "Until you sign out, or the session expires", "Strictly necessary"],
           ["MABS_LOCALE", "Cookie", "Remembers your language (English or Arabic)", "1 year", "Functional"],
           ["mabs_cookie_prefs", "Local storage", "Remembers your cookie choices", "Until you clear it", "Strictly necessary"],
+          ["mabs_invite", "Cookie", "Keeps a personal trial invite while you sign up, then is deleted", "Up to 7 days", "Strictly necessary"],
         ]],
+        ["p", "On the sign-up and sign-in pages, **Cloudflare Turnstile** checks that you are a person and not a bot. The check runs in a frame from Cloudflare (challenges.cloudflare.com) and is handled under Cloudflare's own privacy policy."],
         ["p", "Strictly necessary items cannot be switched off, because the app cannot work without them. **We do not use analytics, advertising or marketing cookies today.** If we add any, we will update this policy and ask for your consent first where the law requires it."],
         ["h2", "Your choices"],
         ["ul", [
@@ -210,8 +215,11 @@ export const legal = {
         ["h2", "5. مع من نشاركها"],
         ["p", "نشارك البيانات الشخصية فقط مع مزوّدي خدمات يعالجونها وفق تعليماتنا:"],
         ["ul", [
-          "**Supabase:** قاعدة البيانات وتسجيل الدخول، بما في ذلك رسائل الحساب مثل التأكيد وإعادة تعيين كلمة المرور.",
+          "**Supabase:** قاعدة البيانات وتسجيل الدخول.",
+          "**Namecheap (Private Email):** يرسل رسائل الحساب، مثل تأكيد التسجيل وإعادة تعيين كلمة المرور، من contact@megmos.com.",
+          "**Cloudflare (Turnstile):** يتحقق من أن عمليات التسجيل وتسجيل الدخول يقوم بها إنسان وليس برنامجًا آليًا. ويتلقى عنوان IP الخاص بك وتفاصيل تقنية عن متصفحك.",
           "**Anthropic:** إنشاء المحتوى بالذكاء الاصطناعي وردود مساعد MABS على megmos.com.",
+          "**Shotstack:** يُنتج مقاطع الفيديو التي تنشئها في استوديو الفيديو من الصور والمقاطع والنصوص التي تختارها.",
           "**Vercel:** استضافة megmos.com وتطبيق MABS.",
           "**Google Fonts:** يقدّم الخطوط على megmos.com ويتلقى عنوان IP الخاص بك عند تحميل الصفحة.",
           "**Stripe:** معالجة المدفوعات، فقط بعد إطلاق الباقات المدفوعة.",
@@ -282,7 +290,7 @@ export const legal = {
         ["h2", "7. ملكيتنا"],
         ["p", "الخدمة، بما فيها البرمجيات وتصاميم المولّدات والتعليمات والقوالب والتصميم واسما MABS وMegmos وشعاراتهما، مملوكة لنا أو لمرخّصينا. ولا تمنحك هذه الشروط أي حقوق فيها تتجاوز استخدام الخدمة."],
         ["h2", "8. خدمات الأطراف الثالثة"],
-        ["p", "تعتمد الخدمة على مزوّدين مثل Supabase وAnthropic وVercel. وتنطبق شروطهم الخاصة على استخدامك مواقعهم. ولسنا مسؤولين عن خدمات لا نتحكم فيها."],
+        ["p", "تعتمد الخدمة على مزوّدين مثل Supabase وAnthropic وVercel وCloudflare وShotstack وNamecheap. وتنطبق شروطهم الخاصة على استخدامك مواقعهم. ولسنا مسؤولين عن خدمات لا نتحكم فيها."],
         ["h2", "9. التغييرات والتوفر"],
         ["p", "نعمل باستمرار على تحسين MABS وقد نضيف مزايا أو نغيّرها أو نزيلها. نسعى إلى إبقاء الخدمة متاحة، لكننا لا نضمن تشغيلها دون انقطاع أو أخطاء. وسنقدّم إشعارًا معقولًا بالتغييرات التي تقلّص بشكل كبير ما تتضمنه باقة مدفوعة."],
         ["h2", "10. إنهاء حسابك"],
@@ -318,7 +326,9 @@ export const legal = {
           ["sb-…-auth-token", "ملف تعريف ارتباط (Supabase)", "يبقيك مسجلًا للدخول بأمان (قد يُقسَّم إلى أجزاء مرقّمة)", "حتى تسجيل الخروج أو انتهاء الجلسة", "ضروري تمامًا"],
           ["MABS_LOCALE", "ملف تعريف ارتباط", "يتذكر لغتك (العربية أو الإنجليزية)", "سنة واحدة", "وظيفي"],
           ["mabs_cookie_prefs", "تخزين محلي", "يتذكر اختياراتك بشأن ملفات تعريف الارتباط", "حتى تحذفه", "ضروري تمامًا"],
+          ["mabs_invite", "ملف تعريف ارتباط", "يحتفظ بدعوة التجربة الشخصية أثناء التسجيل، ثم يُحذف", "حتى 7 أيام", "ضروري تمامًا"],
         ]],
+        ["p", "في صفحتي التسجيل وتسجيل الدخول، يتحقق **Cloudflare Turnstile** من أنك إنسان وليس برنامجًا آليًا. ويعمل هذا التحقق داخل إطار من Cloudflare (challenges.cloudflare.com) وتخضع معالجته لسياسة الخصوصية الخاصة بـ Cloudflare."],
         ["p", "لا يمكن إيقاف العناصر الضرورية تمامًا لأن التطبيق لا يعمل بدونها. **لا نستخدم حاليًا ملفات تعريف ارتباط للتحليل أو الإعلان أو التسويق.** وإذا أضفنا أيًا منها، فسنحدّث هذه السياسة ونطلب موافقتك أولًا حيث يقتضي القانون ذلك."],
         ["h2", "اختياراتك"],
         ["ul", [
