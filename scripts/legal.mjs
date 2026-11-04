@@ -8,7 +8,7 @@ const ADDRESS = "30 N Gould St Ste R, Sheridan, WY 82801, USA";
 const PRIVACY = "privacy@megmos.com";
 const SUPPORT = "support@megmos.com";
 
-export const LEGAL_UPDATED = { en: "3 November 2026", ar: "3 نوفمبر 2026" };
+export const LEGAL_UPDATED = { en: "4 November 2026", ar: "4 نوفمبر 2026" };
 
 export const legal = {
   en: {
@@ -55,6 +55,7 @@ export const legal = {
           "**Cloudflare (Turnstile):** checks that sign-ups and sign-ins come from a person and not a bot. It receives your IP address and technical details about your browser.",
           "**Anthropic:** AI content generation and replies from the MABS Assistant on megmos.com.",
           "**Shotstack:** renders the videos you create in Video Studio from the photos, clips and texts you choose.",
+          "**ElevenLabs:** turns the voice-over lines you write in Video Studio into speech, when you choose a voice-over.",
           "**Vercel:** hosting of megmos.com and the MABS app.",
           "**Google Fonts:** delivers the fonts on megmos.com and receives your IP address when the page loads.",
           "**Stripe:** payment processing, only once paid plans launch.",
@@ -125,7 +126,7 @@ export const legal = {
         ["h2", "7. Our property"],
         ["p", "The Service, including its software, generator designs, prompts, templates, design and the MABS and Megmos names and logos, belongs to us or our licensors. These Terms do not give you any rights to them beyond using the Service."],
         ["h2", "8. Third-party services"],
-        ["p", "The Service relies on providers such as Supabase, Anthropic, Vercel, Cloudflare, Shotstack and Namecheap. Their own terms apply to your use of their sites. We are not responsible for services we do not control."],
+        ["p", "The Service relies on providers such as Supabase, Anthropic, Vercel, Cloudflare, Shotstack, ElevenLabs and Namecheap. Their own terms apply to your use of their sites. We are not responsible for services we do not control."],
         ["h2", "9. Changes and availability"],
         ["p", "We are continually improving MABS and may add, change or remove features. We aim to keep the Service available, but we do not guarantee uninterrupted or error-free operation. We will give reasonable notice of changes that significantly reduce what a paid plan includes."],
         ["h2", "10. Ending your account"],
@@ -220,6 +221,7 @@ export const legal = {
           "**Cloudflare (Turnstile):** يتحقق من أن عمليات التسجيل وتسجيل الدخول يقوم بها إنسان وليس برنامجًا آليًا. ويتلقى عنوان IP الخاص بك وتفاصيل تقنية عن متصفحك.",
           "**Anthropic:** إنشاء المحتوى بالذكاء الاصطناعي وردود مساعد MABS على megmos.com.",
           "**Shotstack:** يُنتج مقاطع الفيديو التي تنشئها في استوديو الفيديو من الصور والمقاطع والنصوص التي تختارها.",
+          "**ElevenLabs:** يحوّل جمل التعليق الصوتي التي تكتبها في استوديو الفيديو إلى كلام، عندما تختار تعليقًا صوتيًا.",
           "**Vercel:** استضافة megmos.com وتطبيق MABS.",
           "**Google Fonts:** يقدّم الخطوط على megmos.com ويتلقى عنوان IP الخاص بك عند تحميل الصفحة.",
           "**Stripe:** معالجة المدفوعات، فقط بعد إطلاق الباقات المدفوعة.",
@@ -290,7 +292,7 @@ export const legal = {
         ["h2", "7. ملكيتنا"],
         ["p", "الخدمة، بما فيها البرمجيات وتصاميم المولّدات والتعليمات والقوالب والتصميم واسما MABS وMegmos وشعاراتهما، مملوكة لنا أو لمرخّصينا. ولا تمنحك هذه الشروط أي حقوق فيها تتجاوز استخدام الخدمة."],
         ["h2", "8. خدمات الأطراف الثالثة"],
-        ["p", "تعتمد الخدمة على مزوّدين مثل Supabase وAnthropic وVercel وCloudflare وShotstack وNamecheap. وتنطبق شروطهم الخاصة على استخدامك مواقعهم. ولسنا مسؤولين عن خدمات لا نتحكم فيها."],
+        ["p", "تعتمد الخدمة على مزوّدين مثل Supabase وAnthropic وVercel وCloudflare وShotstack وElevenLabs وNamecheap. وتنطبق شروطهم الخاصة على استخدامك مواقعهم. ولسنا مسؤولين عن خدمات لا نتحكم فيها."],
         ["h2", "9. التغييرات والتوفر"],
         ["p", "نعمل باستمرار على تحسين MABS وقد نضيف مزايا أو نغيّرها أو نزيلها. نسعى إلى إبقاء الخدمة متاحة، لكننا لا نضمن تشغيلها دون انقطاع أو أخطاء. وسنقدّم إشعارًا معقولًا بالتغييرات التي تقلّص بشكل كبير ما تتضمنه باقة مدفوعة."],
         ["h2", "10. إنهاء حسابك"],
