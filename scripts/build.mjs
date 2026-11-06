@@ -5,6 +5,7 @@ import { en, ar, APP, SITE } from "./content.mjs";
 import { legal, LEGAL_UPDATED } from "./legal.mjs";
 import { pages, COMPANY, chatStrings } from "./pages.mjs";
 import { how } from "./howitworks.mjs";
+import { pricing, PLANS } from "./pricing.mjs";
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const br = (s) => esc(s).replace(/\n/g, "<br>");
@@ -140,7 +141,7 @@ function footerHtml(t) {
       <p>${esc(t.footer.desc)}</p>
     </div>
     <nav aria-label="${esc(t.footer.navLabel)}" class="foot-cols">
-      <div><h3>${esc(t.footer.navTitle)}</h3><a href="${t.path}#product">${esc(t.nav.product)}</a><a href="${t.path}#features">${esc(t.nav.features)}</a><a href="${base}how-it-works/">${esc(t.nav.how)}</a><a href="${t.path}#faq">${esc(t.nav.faq)}</a></div>
+      <div><h3>${esc(t.footer.navTitle)}</h3><a href="${t.path}#product">${esc(t.nav.product)}</a><a href="${t.path}#features">${esc(t.nav.features)}</a><a href="${base}how-it-works/">${esc(t.nav.how)}</a><a href="${base}pricing/">${esc(pricing[t.lang].navLabel)}</a><a href="${t.path}#faq">${esc(t.nav.faq)}</a></div>
       <div><h3>${esc(t.footer.accountTitle)}</h3><a href="${LOGIN}">${esc(t.nav.login)}</a><a href="${SIGNUP}">${esc(t.nav.start)}</a><a href="${APP}/support">${esc(t.footer.support)}</a></div>
       <div><h3>${esc(L.labels.legal)}</h3><a href="${base}privacy/">${esc(L.privacy.title)}</a><a href="${base}terms/">${esc(L.terms.title)}</a><a href="${base}cookies/">${esc(L.cookies.title)}</a></div>
       <div><h3>${esc(t.footer.companyTitle)}</h3><span>${esc(t.footer.company)}</span><a href="${base}about/">${esc(pages[t.lang].nav.about)}</a><a href="${base}contact/">${esc(t.nav.contact)}</a><a href="${t.other}" hreflang="${otherLang}" lang="${otherLang}">${esc(t.otherLabel)}</a></div>
@@ -228,6 +229,7 @@ function headerHtml(t, otherHref, current = "") {
     <nav class="nav" id="site-nav" aria-label="${esc(t.nav.label)}">
       <a href="${t.path}#product">${esc(t.nav.product)}</a>
       <a href="${base}how-it-works/"${cur("how")}>${esc(t.nav.how)}</a>
+      <a href="${base}pricing/"${cur("pricing")}>${esc(pricing[t.lang].navLabel)}</a>
       <a href="${t.path}#features">${esc(t.nav.features)}</a>
       <a href="${t.path}#faq">${esc(t.nav.faq)}</a>
       <a href="${base}about/"${cur("about")}>${esc(P.nav.about)}</a>
@@ -266,6 +268,7 @@ function pageHead(t, title, desc, enPath, arPath) {
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${SITE}${self}">
 <meta property="og:image" content="${SITE}/logo.png">
+<meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#f8f8f8">
 <link rel="icon" href="/logo.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -395,6 +398,94 @@ ${headerHtml(t, t.lang === "en" ? arPath : enPath, "about")}
         }).join("")}</dl>
         <p class="links-row"><b>${esc(A.legalTitle)}:</b> <a href="${base}privacy/">${esc(L.privacy.title)}</a> · <a href="${base}terms/">${esc(L.terms.title)}</a> · <a href="${base}cookies/">${esc(L.cookies.title)}</a></p>
       </div>
+    </div>
+  </section>
+</main>
+${footerHtml(t)}
+<script src="/site.js" defer></script>
+</body>
+</html>
+`;
+}
+
+/* ---------- pricing page ---------- */
+function pricingPage(t) {
+  const R = pricing[t.lang];
+  const base = t.lang === "ar" ? "/ar/" : "/";
+  const enPath = "/pricing/", arPath = "/ar/pricing/";
+  const contactHref = `${base}contact/`;
+  const offers = PLANS.map((p) => ({
+    "@type": "Offer", name: R.names[p.key], price: String(p.monthly), priceCurrency: "USD",
+    ...(p.monthly > 0 ? { priceSpecification: { "@type": "UnitPriceSpecification", price: String(p.monthly), priceCurrency: "USD", unitText: "MONTH", ...(p.contact ? { minPrice: String(p.monthly) } : {}) } } : {}),
+    url: `${SITE}${t.lang === "ar" ? arPath : enPath}`,
+  }));
+  const card = (p) => {
+    const price = `<p class="price"><span class="price-from">${p.contact ? esc(R.from) : ""}</span><b dir="ltr">$${p.monthly}</b>${p.monthly > 0 ? `<span>${esc(R.per)}</span>` : ""}</p>`;
+    const note = p.monthly === 0 ? R.free : p.contact ? R.contactPrice : p.yearlyMonthly ? R.yearly(p.yearlyMonthly, p.yearlyMonthly * 12) : R.monthlyOnly;
+    const href = p.contact ? contactHref : SIGNUP;
+    const label = p.contact ? R.cta.contact : p.monthly === 0 ? R.cta.starter : R.cta.paid;
+    return `<article class="card plan${p.popular ? " plan-pop" : ""} reveal">
+          ${p.popular ? `<span class="plan-badge">${esc(R.popular)}</span>` : ""}
+          <h2 class="plan-name">${esc(R.names[p.key])}</h2>
+          <p class="plan-desc">${esc(R.tags[p.key])}</p>
+          ${price}
+          <p class="plan-note">${esc(note)}</p>
+          <ul class="checklist plan-list">${R.features[p.key].map((f) => `<li>${icon("check", 18)}<span>${esc(f)}</span></li>`).join("")}</ul>
+          <a class="btn ${p.popular ? "btn-primary" : "btn-outline"} plan-cta" href="${href}">${esc(label)}</a>
+        </article>`;
+  };
+  return `${pageHead(t, R.seoTitle, R.desc, enPath, arPath)}
+<script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org", "@type": "SoftwareApplication",
+    name: "MABS (Megmos AI Brand Studio)", url: APP, applicationCategory: "BusinessApplication", operatingSystem: "Web",
+    publisher: { "@type": "Organization", name: COMPANY.trading, url: SITE },
+    offers,
+  })}</script>
+<script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org", "@type": "FAQPage",
+    mainEntity: R.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+  })}</script>
+</head>
+<body>
+<a class="skip" href="#main">${esc(t.skip)}</a>
+${headerHtml(t, t.lang === "en" ? arPath : enPath, "pricing")}
+<main id="main">
+  <section class="page-hero">
+    <div class="wrap page-hero-inner reveal">
+      <p class="eyebrow">${esc(R.eyebrow)}</p>
+      <h1>${esc(R.title)}</h1>
+      <p class="lead">${esc(R.lead)}</p>
+    </div>
+  </section>
+
+  <section class="section band pricing-section" aria-label="${esc(R.eyebrow)}">
+    <div class="wrap">
+      <div class="grid g4 plans">
+        ${PLANS.map(card).join("\n        ")}
+      </div>
+      <div class="plan-extras reveal">
+        <h2>${esc(R.extrasTitle)}</h2>
+        <p>${esc(R.topup)}</p>
+        <p>${esc(R.founding)}</p>
+      </div>
+      <p class="fine">${esc(R.note)}</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="pr-faq">
+    <div class="wrap faq-grid">
+      <div class="section-head reveal"><h2 id="pr-faq">${esc(R.faqTitle)}</h2></div>
+      <div class="faq reveal">
+        ${R.faq.map(([q, a]) => `<details><summary>${esc(q)}<i aria-hidden="true"></i></summary><p>${esc(a)}</p></details>`).join("\n        ")}
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap final-inner reveal">
+      <h2>${esc(R.finalTitle)}</h2>
+      <p class="sub">${esc(R.finalSub)}</p>
+      <div class="cta-row center"><a class="btn btn-primary btn-lg" href="${SIGNUP}">${esc(R.cta.starter)}</a></div>
     </div>
   </section>
 </main>
@@ -717,6 +808,7 @@ function page(t) {
 <meta property="og:description" content="${esc(t.seoDesc)}">
 <meta property="og:url" content="${SITE}${t.path}">
 <meta property="og:image" content="${SITE}/logo.png">
+<meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#f8f8f8">
 <link rel="icon" href="/logo.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -969,8 +1061,10 @@ for (const t of [en, ar]) {
   writeFileSync(`${pre}/contact/index.html`, contactPage(t));
   mkdirSync(`${pre}/how-it-works`, { recursive: true });
   writeFileSync(`${pre}/how-it-works/index.html`, howPage(t));
+  mkdirSync(`${pre}/pricing`, { recursive: true });
+  writeFileSync(`${pre}/pricing/index.html`, pricingPage(t));
 }
-const urls = ["/", "/how-it-works/", "/about/", "/contact/", "/privacy/", "/terms/", "/cookies/"];
+const urls = ["/", "/how-it-works/", "/pricing/", "/about/", "/contact/", "/privacy/", "/terms/", "/cookies/"];
 writeFileSync("public/sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${urls.map((u) => `  <url><loc>${SITE}${u}</loc><xhtml:link rel="alternate" hreflang="ar" href="${SITE}/ar${u}"/></url>

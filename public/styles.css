@@ -585,3 +585,23 @@ html[lang="ar"] .hw-ex-text{font-size:17px;line-height:1.9}
   .hw-ex-in dl{grid-template-columns:1fr}
   .hw-lives{padding:20px}
 }
+
+/* pricing page */
+.plans{align-items:stretch}
+.plan{position:relative;gap:10px}
+.plan-pop{border-color:var(--olive);box-shadow:var(--shadow)}
+.plan-badge{position:absolute;top:-11px;inset-inline-start:24px;background:var(--olive);color:#fff;font-size:11px;font-weight:600;letter-spacing:var(--track);text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.plan-name{font-size:24px;margin:0}
+.plan-desc{min-height:3.2em;font-size:15px;color:var(--muted)!important;margin:0}
+.price{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin:6px 0 0}
+.price b{font-family:var(--f-title);font-weight:400;font-size:42px;line-height:1;color:var(--ink)}
+.price span{font-size:14px;color:var(--muted)}
+.plan-note{font-size:13.5px!important;color:var(--muted)!important;min-height:2.8em}
+.plan-list{flex:1;gap:10px;margin:8px 0 18px}
+.plan-list li{font-size:15px}
+.plan-cta{width:100%}
+.plan-extras{margin-top:48px;max-width:46rem}
+.plan-extras h2{font-size:24px;margin:0 0 12px}
+.plan-extras p{color:var(--body);margin:0 0 10px}
+@media (max-width:1080px){.plans.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.plans.g4{grid-template-columns:1fr}}
