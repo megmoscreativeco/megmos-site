@@ -15,7 +15,7 @@ export const legal = {
     labels: { updated: "Last updated", back: "Back to home", legal: "Legal", prevails: "" },
     privacy: {
       slug: "privacy", title: "Privacy Policy",
-      desc: "How Megmos LLC collects and uses personal data on megmos.com and in MABS.",
+      desc: "How Megmos LLC collects, uses and protects personal data on megmos.com and in MABS, the AI marketing studio for real estate agents, and the choices you have.",
       blocks: [
         ["p", `This Privacy Policy explains how **${ENTITY}, trading as Megmos Creative Co.** ("we", "us", or "our"), collects and uses personal data when you visit **megmos.com** or use **MABS (Megmos AI Brand Studio)** at mabs.megmos.com (together, the "Service").`],
         ["h2", "1. Who is responsible"],
@@ -85,7 +85,7 @@ export const legal = {
     },
     terms: {
       slug: "terms", title: "Terms of Service",
-      desc: "The terms for using MABS (Megmos AI Brand Studio) and megmos.com.",
+      desc: "The terms for using MABS (Megmos AI Brand Studio) and megmos.com: your account, plans, AI-generated content, acceptable use and our responsibilities.",
       blocks: [
         ["p", `These Terms are an agreement between you and **${ENTITY}, trading as Megmos Creative Co.** ("we", "us"). They cover your use of **MABS (Megmos AI Brand Studio)** and **megmos.com** (the "Service"). By creating an account or using the Service, you accept these Terms.`],
         ["h2", "1. Who can use MABS"],
@@ -149,7 +149,7 @@ export const legal = {
     },
     cookies: {
       slug: "cookies", title: "Cookie Policy",
-      desc: "The cookies and similar technologies used on megmos.com and in MABS.",
+      desc: "The cookies and similar technologies used on megmos.com and in MABS, what each one does, and how to manage your cookie preferences at any time.",
       blocks: [
         ["p", "This policy explains the cookies and similar technologies used on **megmos.com** and in the **MABS app** (mabs.megmos.com). A cookie is a small file a website stores in your browser. \"Local storage\" is a similar store that stays on your device."],
         ["h2", "megmos.com"],
@@ -181,7 +181,7 @@ export const legal = {
     labels: { updated: "آخر تحديث", back: "العودة إلى الرئيسية", legal: "قانوني", prevails: "هذه ترجمة عربية للتيسير. في حال وجود أي اختلاف، تكون النسخة الإنجليزية هي المعتمدة." },
     privacy: {
       slug: "privacy", title: "سياسة الخصوصية",
-      desc: "كيف تجمع Megmos LLC البيانات الشخصية وتستخدمها على megmos.com وفي MABS.",
+      desc: "كيف تجمع Megmos LLC البيانات الشخصية وتستخدمها وتحميها على megmos.com وفي MABS، استوديو التسويق العقاري بالذكاء الاصطناعي، والخيارات المتاحة لك.",
       blocks: [
         ["p", `توضح سياسة الخصوصية هذه كيف تجمع **${ENTITY}، العاملة باسم Megmos Creative Co.** («نحن») البيانات الشخصية وتستخدمها عند زيارتك **megmos.com** أو استخدامك **MABS (Megmos AI Brand Studio)** على mabs.megmos.com (ويُشار إليهما معًا بـ«الخدمة»).`],
         ["h2", "1. الجهة المسؤولة"],
@@ -251,7 +251,7 @@ export const legal = {
     },
     terms: {
       slug: "terms", title: "شروط الخدمة",
-      desc: "شروط استخدام MABS (Megmos AI Brand Studio) وmegmos.com.",
+      desc: "شروط استخدام MABS (Megmos AI Brand Studio) وmegmos.com: حسابك والباقات والمحتوى المُنشأ بالذكاء الاصطناعي والاستخدام المقبول ومسؤولياتنا.",
       blocks: [
         ["p", `هذه الشروط اتفاقية بينك وبين **${ENTITY}، العاملة باسم Megmos Creative Co.** («نحن»). وهي تنظم استخدامك **MABS (Megmos AI Brand Studio)** و**megmos.com** («الخدمة»). بإنشائك حسابًا أو استخدامك الخدمة، فإنك توافق على هذه الشروط.`],
         ["h2", "1. من يمكنه استخدام MABS"],
@@ -315,7 +315,7 @@ export const legal = {
     },
     cookies: {
       slug: "cookies", title: "سياسة ملفات تعريف الارتباط",
-      desc: "ملفات تعريف الارتباط والتقنيات المشابهة المستخدمة على megmos.com وفي MABS.",
+      desc: "ملفات تعريف الارتباط والتقنيات المشابهة المستخدمة على megmos.com وفي MABS، ودور كل منها، وكيف تدير تفضيلاتك في أي وقت.",
       blocks: [
         ["p", "توضح هذه السياسة ملفات تعريف الارتباط (الكوكيز) والتقنيات المشابهة المستخدمة على **megmos.com** وفي **تطبيق MABS** (mabs.megmos.com). ملف تعريف الارتباط ملف صغير يحفظه الموقع في متصفحك، و«التخزين المحلي» وسيلة حفظ مشابهة تبقى على جهازك."],
         ["h2", "megmos.com"],
