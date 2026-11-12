@@ -331,7 +331,7 @@ ${headerHtml(t, t.lang === "en" ? arPath : enPath, "about")}
     <div class="wrap">
       <div class="section-head reveal"><h2 id="ab-today">${esc(A.todayTitle)}</h2><p class="sub">${esc(A.todayIntro)}</p></div>
       <div class="grid g2">${A.today.map(([h, b], i) => `
-        <article class="card reveal">${icon(["sparkle", "layers", "browser", "globe"][i], 22, "card-ic")}<h3>${esc(h)}</h3><p>${esc(b)}</p></article>`).join("")}
+        <article class="card reveal">${icon(["sparkle", "layers", "browser", "palette", "globe"][i], 22, "card-ic")}<h3>${esc(h)}</h3><p>${esc(b)}</p></article>`).join("")}
       </div>
     </div>
   </section>
