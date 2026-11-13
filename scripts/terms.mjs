@@ -100,6 +100,16 @@ export const termsEn = {
     ["h3", "4.7 Pricing changes"],
     ["p", "We may modify subscription prices or introduce new pricing structures."],
     ["p", "Any price changes affecting an existing subscription will be communicated in advance and applied in accordance with applicable law and the subscription terms presented to you."],
+    ["h3", "4.8 Website Service"],
+    ["p", `Megmos Creative Co. may build websites for users as a separate one-time service ("Website Service"). The package, price, pages, delivery time and number of change rounds are confirmed in writing before work starts; current packages are listed at **${PRICING_URL}**.`],
+    ["ul", [
+      "Work starts after a deposit (currently 50%) is paid; the balance is due when you approve the site and before the domain is connected.",
+      "The deposit is non-refundable once work has started, except where applicable law requires otherwise.",
+      "Changes beyond the included rounds, and new pages or features, may be quoted separately.",
+      "You own your domain and hosting accounts and pay their providers directly. You are responsible for the accuracy and rights of the content and images you provide, and for keeping the site's information up to date unless you have a care plan.",
+      "On full payment, you receive the right to use the delivered site and its files for your business. Our underlying templates, design system and code may be reused for other clients.",
+      "Live property search (IDX), third-party tools and hosting are not part of the service unless agreed in writing.",
+    ]],
 
     ["h2", "5. Acceptable use"],
     ["p", "You agree to use MABS only for lawful purposes and in accordance with these Terms."],
@@ -463,6 +473,16 @@ export const termsAr = {
     ["h3", "4.7 تغيير الأسعار"],
     ["p", "قد نعدّل أسعار الاشتراكات أو نعتمد هياكل تسعير جديدة."],
     ["p", "سنبلغك مسبقًا بأي تغيير في السعر يؤثر في اشتراك قائم، ويُطبَّق وفق القانون المعمول به وشروط الاشتراك المعروضة عليك."],
+    ["h3", "4.8 خدمة إنشاء الموقع"],
+    ["p", `قد تنشئ ${"Megmos Creative Co.\u200e"} مواقع للمستخدمين كخدمة منفصلة تُدفع مرة واحدة («خدمة إنشاء الموقع»). وتُؤكَّد الباقة والسعر والصفحات ومدة التسليم وعدد جولات التعديل كتابيًا قبل بدء العمل، والباقات الحالية منشورة على **${URLS.pricing.ar}**.`],
+    ["ul", [
+      "يبدأ العمل بعد دفع مقدّم (نسبته حاليًا 50%)، ويُستحق المبلغ المتبقي عند موافقتك على الموقع وقبل ربط النطاق.",
+      "لا يُسترد المقدّم بعد بدء العمل، إلا حيث يقتضي القانون المعمول به خلاف ذلك.",
+      "قد تُسعَّر التعديلات التي تتجاوز الجولات المشمولة، والصفحات أو الميزات الجديدة، بشكل منفصل.",
+      "النطاق وحسابات الاستضافة ملكك وتدفع لمزوّديها مباشرةً. وأنت مسؤول عن دقة المحتوى والصور التي تقدمها وعن حقوقها، وعن تحديث معلومات الموقع ما لم تكن مشتركًا في خطة العناية.",
+      "عند السداد الكامل، تحصل على حق استخدام الموقع المسلَّم وملفاته لأعمالك. ويجوز لنا إعادة استخدام القوالب ونظام التصميم والشيفرة الأساسية لعملاء آخرين.",
+      "لا تشمل الخدمة البحث المباشر في العقارات (IDX) أو أدوات الغير أو الاستضافة ما لم يُتفق على ذلك كتابيًا.",
+    ]],
 
     ["h2", "5. الاستخدام المقبول"],
     ["p", "توافق على استخدام MABS لأغراض مشروعة فقط ووفق هذه الشروط. ويجب ألا تقوم بما يلي:"],

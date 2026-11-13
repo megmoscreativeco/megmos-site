@@ -5,7 +5,7 @@ import { en, ar, APP, SITE } from "./content.mjs";
 import { legal, LEGAL_UPDATED } from "./legal.mjs";
 import { pages, COMPANY, chatStrings } from "./pages.mjs";
 import { how } from "./howitworks.mjs";
-import { pricing, PLANS } from "./pricing.mjs";
+import { pricing, PLANS, WEBSITE_SERVICE } from "./pricing.mjs";
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const br = (s) => esc(s).replace(/\n/g, "<br>");
@@ -469,6 +469,11 @@ ${headerHtml(t, t.lang === "en" ? arPath : enPath, "pricing")}
         <h2>${esc(R.extrasTitle)}</h2>
         <p>${esc(R.topup)}</p>
         <p>${esc(R.founding)}</p>
+      </div>
+      <div class="plan-extras reveal">
+        <h2>${esc(R.websiteTitle)}</h2>
+        <p>${esc(R.website)}</p>
+        <p><a class="text-link" href="${WEBSITE_SERVICE.url}">${esc(R.websiteCta)}</a></p>
       </div>
       <p class="fine">${esc(R.note)}</p>
     </div>

@@ -9,6 +9,9 @@ export const PLANS = [
 ];
 export const TOPUP = { credits: 10, price: 9 };
 export const FOUNDING = { professional: 29, elite: 59, months: 12 };
+// Website Service (done-for-you sites). Must match mabs/lib/websiteService.ts.
+export const WEBSITE_SERVICE = { onePage: 399, agentSite: 899, secondLanguage: 199, care: 29, discount: 20, url: "https://mabs.megmos.com/website-service" };
+const W = WEBSITE_SERVICE;
 
 export const pricing = {
   en: {
@@ -31,6 +34,9 @@ export const pricing = {
     extrasTitle: "Video top-ups and founding members",
     topup: `Video top-up: ${TOPUP.credits} credits for $${TOPUP.price}. Top-up credits don't expire at the end of the month. One credit is 15 seconds of video.`,
     founding: `Founding members: agents invited to the MABS pilot can keep Professional at $${FOUNDING.professional} or Elite at $${FOUNDING.elite} a month for their first ${FOUNDING.months} months.`,
+    websiteTitle: "Website Service: we build your site",
+    website: `Prefer a ready-made website? We build it for you from your Brand and the copy MABS writes. One-Page Site $${W.onePage} one-time (about 7 days) or Agent Website with up to 7 pages $${W.agentSite} one-time (about 14 days). Second language +$${W.secondLanguage}; optional care plan $${W.care}/month; ${W.discount}% off for Professional and Elite members. You own your domain and hosting.`,
+    websiteCta: "Request a website in MABS",
     note: "Online payment opens soon. Prices are in US dollars; taxes may apply.",
     faqTitle: "Questions about pricing",
     faq: [
@@ -65,6 +71,9 @@ export const pricing = {
     extrasTitle: "رصيد الفيديو الإضافي والأعضاء المؤسسون",
     topup: `رصيد فيديو إضافي: ${TOPUP.credits} أرصدة مقابل ${TOPUP.price}$. لا تنتهي الأرصدة الإضافية بنهاية الشهر. الرصيد الواحد يساوي 15 ثانية من الفيديو.`,
     founding: `الأعضاء المؤسسون: يمكن للوكلاء المدعوّين إلى التجربة الأولى لـ MABS الاحتفاظ بالباقة الاحترافية مقابل ${FOUNDING.professional}$ أو بباقة النخبة مقابل ${FOUNDING.elite}$ شهريًا خلال أول ${FOUNDING.months} شهرًا.`,
+    websiteTitle: "خدمة إنشاء الموقع: ننشئ موقعك",
+    website: `تفضّل موقعًا جاهزًا؟ ننشئه لك من علامتك ومن النصوص التي يكتبها MABS. موقع الصفحة الواحدة ${W.onePage}$ دفعة واحدة (نحو 7 أيام)، أو موقع الوكيل حتى 7 صفحات ${W.agentSite}$ دفعة واحدة (نحو 14 يومًا). اللغة الثانية ${W.secondLanguage}$ إضافية، وخطة العناية الاختيارية ${W.care}$ شهريًا، وخصم ${W.discount}% لمشتركي الباقة الاحترافية وباقة النخبة. النطاق والاستضافة ملكك.`,
+    websiteCta: "اطلب موقعًا في MABS",
     note: "الدفع الإلكتروني متاح قريبًا. الأسعار بالدولار الأمريكي وقد تُضاف الضرائب.",
     faqTitle: "أسئلة حول الأسعار",
     faq: [
