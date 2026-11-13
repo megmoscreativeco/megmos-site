@@ -158,7 +158,9 @@ const inline = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 function legalBody(blocks) {
   return blocks.map(([type, a, b]) => {
     if (type === "h2") return `<h2>${inline(a)}</h2>`;
+    if (type === "h3") return `<h3>${inline(a)}</h3>`;
     if (type === "p") return `<p>${inline(a)}</p>`;
+    if (type === "ol") return `<ol>${a.map((li) => `<li>${inline(li)}</li>`).join("")}</ol>`;
     if (type === "ul") return `<ul>${a.map((li) => `<li>${inline(li)}</li>`).join("")}</ul>`;
     if (type === "table") return `<div class="table-wrap"><table><thead><tr>${a.map((h) => `<th scope="col">${inline(h)}</th>`).join("")}</tr></thead><tbody>${b.map((r) => `<tr>${r.map((c) => `<td>${inline(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
     return "";
@@ -199,7 +201,7 @@ ${headerHtml(t, other)}
     <a class="text-link back" href="${t.path}">${icon("arrow", 16, "back-ic")} ${esc(L.labels.back)}</a>
     <p class="eyebrow">${esc(L.labels.legal)}</p>
     <h1>${esc(doc.title)}</h1>
-    <p class="legal-date">${esc(L.labels.updated)}: ${esc(LEGAL_UPDATED[t.lang])}</p>
+    <p class="legal-date">${esc(L.labels.updated)}: ${esc((doc.updated || LEGAL_UPDATED)[t.lang])}</p>
     ${L.labels.prevails ? `<p class="legal-note">${esc(L.labels.prevails)}</p>` : ""}
     <article class="legal-body">
       ${legalBody(doc.blocks)}
