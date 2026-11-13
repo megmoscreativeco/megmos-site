@@ -2,17 +2,14 @@
 // Source: Megmos's own Terms of Use draft (published 2026-11-13, pending lawyer review).
 // Block format as in legal.mjs, plus ["h3", text] and ["ol", [items]].
 
-const ENTITY = "Megmos LLC";
-const ADDRESS = "30 N Gould St Ste R, Sheridan, WY 82801, USA";
-const PRIVACY = "privacy@megmos.com";
-const SUPPORT = "support@megmos.com";
-const PRIVACY_URL = "https://megmos.com/privacy/";
-const PRICING_URL = "https://megmos.com/pricing/";
+import { ENTITY, ADDRESS, PRIVACY, SUPPORT, URLS, LEGAL_UPDATED, contactEn, contactAr } from "./legal-common.mjs";
 
-export const TERMS_UPDATED = { en: "13 November 2026", ar: "13 نوفمبر 2026" };
+const PRIVACY_URL = URLS.privacy.en;
+const PRICING_URL = URLS.pricing.en;
+const TERMS_UPDATED = LEGAL_UPDATED;
 
 export const termsEn = {
-  slug: "terms", title: "Terms of Use", updated: TERMS_UPDATED,
+  slug: "terms", title: "Terms of Use",
   desc: "The Terms of Use for MABS (Megmos AI Brand Studio) and megmos.com: accounts, trials and subscriptions, AI-generated content, acceptable use and liability.",
   blocks: [
     ["p", `**Effective date:** ${TERMS_UPDATED.en}`],
@@ -373,22 +370,16 @@ export const termsEn = {
 
     ["h2", "22. Contact information"],
     ["p", "If you have questions, concerns, or requests relating to these Terms or the MABS platform, please contact us:"],
-    ["ul", [
-      `**${ENTITY}**, trading as Megmos Creative Co., registered in Wyoming, United States`,
-      `Mailing address: ${ADDRESS}`,
-      "Website: https://megmos.com · App: https://mabs.megmos.com",
-      `Email: **${SUPPORT}**`,
-      `Privacy inquiries: **${PRIVACY}**`,
-    ]],
+    ["ul", contactEn],
   ],
 };
 
 export const termsAr = {
-  slug: "terms", title: "شروط الاستخدام", updated: TERMS_UPDATED,
-  desc: "شروط استخدام MABS (Megmos AI Brand Studio) وmegmos.com: الحسابات والتجارب والاشتراكات والمحتوى المُنشأ بالذكاء الاصطناعي والاستخدام المقبول والمسؤولية.",
+  slug: "terms", title: "شروط الاستخدام",
+  desc: "شروط استخدام ⁦MABS (Megmos AI Brand Studio)⁩ وmegmos.com: الحسابات والتجارب والاشتراكات والمحتوى المُنشأ بالذكاء الاصطناعي والاستخدام المقبول والمسؤولية.",
   blocks: [
     ["p", `**تاريخ السريان:** ${TERMS_UPDATED.ar}`],
-    ["p", "مرحبًا بك في MABS (Megmos AI Brand Studio)."],
+    ["p", "مرحبًا بك في ⁦MABS (Megmos AI Brand Studio)⁩."],
     ["p", `تنظّم شروط الاستخدام هذه («الشروط») وصولك إلى MABS واستخدامك له، وهو منصة للعلامة التجارية والتسويق تعمل بالذكاء الاصطناعي، تطوّرها وتشغّلها **${ENTITY}، العاملة باسم Megmos Creative Co.‎**، وهي شركة ذات مسؤولية محدودة مسجّلة في ولاية وايومنغ بالولايات المتحدة («الشركة» أو «Megmos» أو «نحن»).`],
     ["p", "تسري هذه الشروط على استخدامك لما يلي:"],
     ["ol", [
@@ -452,7 +443,7 @@ export const termsAr = {
     ["p", "على سبيل المثال، تمنح دعوة التجربة الأولى الحالية لـ MABS المستخدمين المؤهلين 30 يومًا من الوصول المجاني دون بطاقة دفع. وعند انتهائها ينتقل الحساب إلى باقة البداية المجانية ما لم يختر المستخدم باقة مدفوعة، ولا تُحذف مشاريعه ولا محتواه."],
     ["p", "لا تضمن التجربة المجانية تلقائيًا استمرار الوصول إلى الخدمة بعد انتهائها."],
     ["h3", "4.2 الاشتراكات المدفوعة"],
-    ["p", `قد تتطلب بعض ميزات MABS اشتراكًا مدفوعًا. الباقات والأسعار الحالية منشورة على **${PRICING_URL.replace("megmos.com/", "megmos.com/ar/")}**.`],
+    ["p", `قد تتطلب بعض ميزات MABS اشتراكًا مدفوعًا. الباقات والأسعار الحالية منشورة على **${URLS.pricing.ar}**.`],
     ["p", "قبل شراء أي اشتراك، ستُعرض عليك قيمته ودورة الفوترة والميزات المشمولة وشروط الاشتراك الأخرى ذات الصلة."],
     ["p", "باشتراكك، فإنك تفوّض مزوّد الدفع بخصم المبالغ من وسيلة الدفع التي اخترتها وفق شروط الفوترة المعروضة عند الدفع."],
     ["h3", "4.3 التجديد التلقائي"],
@@ -737,12 +728,6 @@ export const termsAr = {
 
     ["h2", "22. معلومات التواصل"],
     ["p", "إذا كانت لديك أسئلة أو ملاحظات أو طلبات تتعلق بهذه الشروط أو بمنصة MABS، فتواصل معنا:"],
-    ["ul", [
-      `**${ENTITY}**، العاملة باسم Megmos Creative Co.‎، مسجّلة في ولاية وايومنغ بالولايات المتحدة`,
-      `العنوان البريدي: \u2066${ADDRESS}\u2069`,
-      "الموقع: https://megmos.com · التطبيق: https://mabs.megmos.com",
-      `البريد الإلكتروني: **${SUPPORT}**`,
-      `استفسارات الخصوصية: **${PRIVACY}**`,
-    ]],
+    ["ul", contactAr],
   ],
 };

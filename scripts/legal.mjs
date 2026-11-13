@@ -1,221 +1,26 @@
 // Legal pages for megmos.com (Privacy, Terms, Cookies), EN and AR.
-// Source of truth: "MABS Legal Texts (Draft)" doc, approved 2026-10-16.
-// Block format: ["h2", text] | ["p", text] | ["ul", [items]] | ["table", [head], [[row]...]]
-// Inline **bold** is supported. Terms of Use content lives in scripts/terms.mjs.
+// Content: scripts/terms.mjs, privacy.mjs, cookies.mjs. Shared identity and date: legal-common.mjs.
+// Block format: ["h2", text] | ["h3", text] | ["p", text] | ["ul", [items]] | ["ol", [items]] | ["table", [head], [[row]...]]
+// Inline **bold** is supported.
+// The MABS app shows the same texts in its Privacy Center: after a change here, run
+//   node scripts/export-mabs-legal.mjs ../mabs/lib/legalContent.ts
 
 import { termsEn, termsAr } from "./terms.mjs";
-
-const ENTITY = "Megmos LLC";
-const ADDRESS = "30 N Gould St Ste R, Sheridan, WY 82801, USA";
-const PRIVACY = "privacy@megmos.com";
-const SUPPORT = "support@megmos.com";
-
-export const LEGAL_UPDATED = { en: "4 November 2026", ar: "4 نوفمبر 2026" };
+import { privacyEn, privacyAr } from "./privacy.mjs";
+import { cookiesEn, cookiesAr } from "./cookies.mjs";
+export { LEGAL_UPDATED } from "./legal-common.mjs";
 
 export const legal = {
   en: {
     labels: { updated: "Last updated", back: "Back to home", legal: "Legal", prevails: "" },
-    privacy: {
-      slug: "privacy", title: "Privacy Policy",
-      desc: "How Megmos LLC collects, uses and protects personal data on megmos.com and in MABS, the AI marketing studio for real estate agents, and the choices you have.",
-      blocks: [
-        ["p", `This Privacy Policy explains how **${ENTITY}, trading as Megmos Creative Co.** ("we", "us", or "our"), collects and uses personal data when you visit **megmos.com** or use **MABS (Megmos AI Brand Studio)** at mabs.megmos.com (together, the "Service").`],
-        ["h2", "1. Who is responsible"],
-        ["p", `We are the data controller for the personal data described here. Contact: **${PRIVACY}** · ${ENTITY}, ${ADDRESS}.`],
-        ["p", "For content you create about your own clients (for example a client follow-up email), you decide what to enter and how to use the result. We process that information only to provide the Service to you."],
-        ["h2", "2. What we collect"],
-        ["ul", [
-          "**Account data:** your name, email address and password. Passwords are stored by our authentication provider in hashed form, never in plain text.",
-          "**Brand Context:** the business details you choose to add, such as your brand or agent name, brokerage, phone, email, website, office address, service areas, brand voice, social media links, brand colours and a link to your logo.",
-          "**Projects and inputs:** property details and other information you type into generator forms, including any source content you paste.",
-          "**Generated content:** the text MABS produces for you, and the edits and saved versions you keep in your Content Library.",
-          "**Usage records:** which generators you run, when, and whether a generation succeeded. We use these to apply your plan's monthly limit and to fix errors.",
-          "**Preferences:** your language, cookie and marketing-email choices.",
-          "**Technical data:** IP address, browser type and request logs, collected by our hosting provider to deliver and secure the Service.",
-          "**Messages to us:** what you send when you email us or use the contact form on megmos.com.",
-          "**Chat assistant:** the questions you type into the MABS Assistant on megmos.com. They are sent to our AI provider to generate a reply and are not stored by us.",
-        ]],
-        ["p", "We do not collect payment card details today. When paid plans launch, payments will be handled by our payment processor, and this policy will be updated before then."],
-        ["h2", "3. How we use it, and our legal bases"],
-        ["table", ["Purpose", "Legal basis (EU/UK GDPR)"], [
-          ["Create and run your account, and generate, store and show your content", "Performance of our contract with you"],
-          ["Apply plan limits, prevent abuse and keep the Service secure", "Our legitimate interests in running a safe, reliable service"],
-          ["Fix errors and improve the Service", "Our legitimate interests"],
-          ["Send service emails (sign-in, security, important changes)", "Performance of contract"],
-          ["Send product news or tips", "Your consent, which you can withdraw at any time. We do not send marketing emails today."],
-          ["Meet legal obligations (for example tax records once billing starts)", "Legal obligation"],
-        ]],
-        ["h2", "4. How AI generation works"],
-        ["p", "When you click Generate, we send the generator's instructions, together with the relevant inputs, project facts and Brand Context, to **Anthropic**, the provider of the Claude AI models. Anthropic processes this information to return the generated content and help us provide the Service."],
-        ["p", "Under Anthropic's published policy for commercial API customers, inputs and outputs are not used to train its models by default, unless the customer explicitly permits such use. Anthropic's standard API retention policy generally provides for deletion of inputs and outputs within 30 days, subject to exceptions and any different contractual arrangements."],
-        ["p", "We do not use your content to train AI models. We do not sell your personal data or share it for cross-context behavioural advertising."],
-        ["h2", "5. Who we share it with"],
-        ["p", "We share personal data only with service providers that process it on our instructions:"],
-        ["ul", [
-          "**Supabase:** database and sign-in.",
-          "**Namecheap (Private Email):** sends account emails, such as sign-up confirmations and password resets, from contact@megmos.com.",
-          "**Cloudflare (Turnstile):** checks that sign-ups and sign-ins come from a person and not a bot. It receives your IP address and technical details about your browser.",
-          "**Anthropic:** AI content generation and replies from the MABS Assistant on megmos.com.",
-          "**Shotstack:** renders the videos you create in Video Studio from the photos, clips and texts you choose.",
-          "**ElevenLabs:** turns the voice-over lines you write in Video Studio into speech, when you choose a voice-over.",
-          "**Vercel:** hosting of megmos.com and the MABS app.",
-          "**Google Fonts:** delivers the fonts on megmos.com and receives your IP address when the page loads.",
-          "**Stripe:** payment processing, only once paid plans launch.",
-        ]],
-        ["p", "We may also disclose data if the law requires it, to protect our rights or users' safety, or as part of a sale or reorganisation of our business. In that case we will tell you before your data falls under a different privacy policy."],
-        ["h2", "6. International transfers"],
-        ["p", "We are based in the United States, and our providers may process data in the United States and other countries. Where EU/UK law applies, we rely on adequacy decisions (such as the EU–US Data Privacy Framework, where the provider is certified) or the European Commission's Standard Contractual Clauses."],
-        ["h2", "7. How long we keep it"],
-        ["ul", [
-          "**Account data, Brand Context, projects and saved content:** kept while your account remains open. After account deletion, we delete this data within 30 days, except where retention is legally required or otherwise permitted by applicable law.",
-          "**Backups:** backup copies containing deleted data are removed through the backup-retention cycle within a further 30 days, subject to technical limitations and legal requirements.",
-          "**Usage records:** kept for up to 24 months for usage-limit administration, security, abuse prevention and troubleshooting.",
-          "**Hosting logs:** kept according to our hosting provider's retention settings, generally for days to weeks.",
-          "**Support messages:** kept for up to 24 months after the conversation ends, unless the law requires or justifies a different period.",
-        ]],
-        ["p", "Our service providers may keep information under their own contractual terms and retention policies."],
-        ["h2", "8. Your rights"],
-        ["p", "Depending on where you live, you can ask to **access**, **correct**, **delete** or **export** your personal data, **object to** or **restrict** some processing, and **withdraw consent** at any time. Residents of California and other US states with privacy laws have similar rights to know, delete and correct their data, and we will not treat you differently for using them."],
-        ["p", `To use these rights, email **${PRIVACY}**. You can also send an export or deletion request from Settings → Privacy in MABS. These requests are handled manually for now. We reply within one month, or within the deadline your law sets. In the EU or UK you can also complain to your local data protection authority.`],
-        ["h2", "9. Security"],
-        ["p", "We use encrypted connections (HTTPS), access controls and providers with recognised security programmes. No system is perfectly secure. If a breach affects your data, we will notify you and the authorities as the law requires."],
-        ["h2", "10. Children"],
-        ["p", "MABS is a professional tool for adults. It is not intended for anyone under 18, and we do not knowingly collect children's data."],
-        ["h2", "11. Changes"],
-        ["p", "We will post any update here with a new date. If a change is significant, we will also notify signed-in users before it takes effect."],
-      ],
-    },
+    privacy: privacyEn,
     terms: termsEn,
-    cookies: {
-      slug: "cookies", title: "Cookie Policy",
-      desc: "The cookies and similar technologies used on megmos.com and in MABS, what each one does, and how to manage your cookie preferences at any time.",
-      blocks: [
-        ["p", "This policy explains the cookies and similar technologies used on **megmos.com** and in the **MABS app** (mabs.megmos.com). A cookie is a small file a website stores in your browser. \"Local storage\" is a similar store that stays on your device."],
-        ["h2", "megmos.com"],
-        ["p", "**megmos.com does not set any cookies.** It has no analytics, advertising or tracking tools."],
-        ["p", "If you use the MABS Assistant chat, your conversation is kept in your browser's session storage (mabs_chat_en or mabs_chat_ar) so it stays open as you move between pages. It is deleted when you close the tab, or when you click New chat."],
-        ["p", "To display its fonts, the site loads them from **Google Fonts**. Your browser therefore connects to Google's servers, which receive your IP address. See Google's privacy policy for how Google handles this."],
-        ["h2", "The MABS app"],
-        ["p", "We use only what MABS needs to work and to remember your choices:"],
-        ["table", ["Name", "Type", "Purpose", "Duration", "Category"], [
-          ["sb-…-auth-token", "Cookie (Supabase)", "Keeps you signed in securely (may be split into numbered parts)", "Until you sign out, or the session expires", "Strictly necessary"],
-          ["MABS_LOCALE", "Cookie", "Remembers your language (English or Arabic)", "1 year", "Functional"],
-          ["mabs_cookie_prefs", "Local storage", "Remembers your cookie choices", "Until you clear it", "Strictly necessary"],
-          ["mabs_invite", "Cookie", "Keeps a personal trial invite while you sign up, then is deleted", "Up to 7 days", "Strictly necessary"],
-        ]],
-        ["p", "On the sign-up and sign-in pages, **Cloudflare Turnstile** checks that you are a person and not a bot. The check runs in a frame from Cloudflare (challenges.cloudflare.com) and is handled under Cloudflare's own privacy policy."],
-        ["p", "Strictly necessary items cannot be switched off, because the app cannot work without them. **We do not use analytics, advertising or marketing cookies today.** If we add any, we will update this policy and ask for your consent first where the law requires it."],
-        ["h2", "Your choices"],
-        ["ul", [
-          "Manage your preferences in MABS under **Settings → Privacy → Cookie Preferences**.",
-          "You can also block or delete cookies in your browser settings. If you block the sign-in cookie, you will not be able to use MABS.",
-        ]],
-        ["h2", "Contact"],
-        ["p", `Questions: **${PRIVACY}**`],
-      ],
-    },
+    cookies: cookiesEn,
   },
-
   ar: {
     labels: { updated: "آخر تحديث", back: "العودة إلى الرئيسية", legal: "قانوني", prevails: "هذه ترجمة عربية للتيسير. في حال وجود أي اختلاف، تكون النسخة الإنجليزية هي المعتمدة." },
-    privacy: {
-      slug: "privacy", title: "سياسة الخصوصية",
-      desc: "كيف تجمع Megmos LLC البيانات الشخصية وتستخدمها وتحميها على megmos.com وفي MABS، استوديو التسويق العقاري بالذكاء الاصطناعي، والخيارات المتاحة لك.",
-      blocks: [
-        ["p", `توضح سياسة الخصوصية هذه كيف تجمع **${ENTITY}، العاملة باسم Megmos Creative Co.** («نحن») البيانات الشخصية وتستخدمها عند زيارتك **megmos.com** أو استخدامك **MABS (Megmos AI Brand Studio)** على mabs.megmos.com (ويُشار إليهما معًا بـ«الخدمة»).`],
-        ["h2", "1. الجهة المسؤولة"],
-        ["p", `نحن المتحكم في البيانات الشخصية الموضحة هنا. للتواصل: **${PRIVACY}** · ${ENTITY}، ${ADDRESS}.`],
-        ["p", "بالنسبة إلى المحتوى الذي تنشئه عن عملائك (مثل رسالة متابعة لعميل)، فأنت من يقرر ما تُدخله وكيف تستخدم النتيجة. ونحن نعالج تلك المعلومات فقط لتقديم الخدمة لك."],
-        ["h2", "2. ما الذي نجمعه"],
-        ["ul", [
-          "**بيانات الحساب:** اسمك وبريدك الإلكتروني وكلمة المرور. يحفظ مزوّد المصادقة كلمات المرور بصيغة مشفّرة (hash)، ولا تُحفظ أبدًا كنص صريح.",
-          "**سياق العلامة:** بيانات العمل التي تختار إضافتها، مثل اسم العلامة أو الوكيل، والوكالة، والهاتف، والبريد، والموقع الإلكتروني، وعنوان المكتب، ومناطق العمل، وأسلوب العلامة، وروابط وسائل التواصل، وألوان العلامة، ورابط شعارك.",
-          "**المشاريع والمدخلات:** بيانات العقار وغيرها من المعلومات التي تكتبها في نماذج المولّدات، بما في ذلك أي محتوى مصدري تلصقه.",
-          "**المحتوى المُنشأ:** النصوص التي ينتجها MABS لك، والتعديلات والنسخ المحفوظة في مكتبة المحتوى.",
-          "**سجلات الاستخدام:** المولّدات التي تشغّلها، ومتى، وهل نجحت العملية. نستخدمها لتطبيق الحد الشهري لباقتك ولإصلاح الأخطاء.",
-          "**التفضيلات:** اختياراتك بشأن اللغة وملفات تعريف الارتباط ورسائل التسويق.",
-          "**البيانات التقنية:** عنوان IP ونوع المتصفح وسجلات الطلبات، يجمعها مزوّد الاستضافة لتقديم الخدمة وتأمينها.",
-          "**رسائلك إلينا:** ما ترسله عندما تراسلنا بالبريد الإلكتروني أو عبر نموذج التواصل على megmos.com.",
-          "**المساعد الذكي:** الأسئلة التي تكتبها في مساعد MABS على megmos.com. تُرسَل إلى مزوّد الذكاء الاصطناعي لإنشاء الرد، ولا نحتفظ بها.",
-        ]],
-        ["p", "لا نجمع بيانات بطاقات الدفع حاليًا. وعند إطلاق الباقات المدفوعة، سيتولى معالج المدفوعات عمليات الدفع، وسنحدّث هذه السياسة قبل ذلك."],
-        ["h2", "3. كيف نستخدمها والأساس القانوني"],
-        ["table", ["الغرض", "الأساس القانوني (اللائحة العامة لحماية البيانات في الاتحاد الأوروبي/المملكة المتحدة)"], [
-          ["إنشاء حسابك وتشغيله، وإنشاء محتواك وحفظه وعرضه", "تنفيذ العقد المبرم معك"],
-          ["تطبيق حدود الباقات ومنع إساءة الاستخدام وتأمين الخدمة", "مصلحتنا المشروعة في تشغيل خدمة آمنة وموثوقة"],
-          ["إصلاح الأخطاء وتحسين الخدمة", "مصلحتنا المشروعة"],
-          ["إرسال رسائل الخدمة (تسجيل الدخول، الأمان، التغييرات المهمة)", "تنفيذ العقد"],
-          ["إرسال أخبار المنتج أو النصائح", "موافقتك، ويمكنك سحبها في أي وقت. لا نرسل رسائل تسويقية حاليًا."],
-          ["الوفاء بالالتزامات القانونية (مثل السجلات الضريبية بعد بدء الفوترة)", "التزام قانوني"],
-        ]],
-        ["h2", "4. كيف يعمل الإنشاء بالذكاء الاصطناعي"],
-        ["p", "عندما تنقر «إنشاء»، نرسل تعليمات المولّد مع المدخلات ذات الصلة وبيانات المشروع وسياق العلامة إلى **Anthropic**، مزوّد نماذج Claude للذكاء الاصطناعي. تعالج Anthropic هذه المعلومات لإرجاع المحتوى المُنشأ ومساعدتنا في تقديم الخدمة."],
-        ["p", "وفق السياسة المنشورة من Anthropic لعملاء واجهة البرمجة التجاريين، لا تُستخدم المدخلات والمخرجات لتدريب نماذجها افتراضيًا، ما لم يسمح العميل بذلك صراحةً. وتنص سياسة الاحتفاظ القياسية لديها عمومًا على حذف المدخلات والمخرجات خلال 30 يومًا، مع مراعاة الاستثناءات وأي ترتيبات تعاقدية مختلفة."],
-        ["p", "لا نستخدم محتواك لتدريب نماذج الذكاء الاصطناعي. ولا نبيع بياناتك الشخصية ولا نشاركها لأغراض الإعلانات السلوكية."],
-        ["h2", "5. مع من نشاركها"],
-        ["p", "نشارك البيانات الشخصية فقط مع مزوّدي خدمات يعالجونها وفق تعليماتنا:"],
-        ["ul", [
-          "**Supabase:** قاعدة البيانات وتسجيل الدخول.",
-          "**Namecheap (Private Email):** يرسل رسائل الحساب، مثل تأكيد التسجيل وإعادة تعيين كلمة المرور، من contact@megmos.com.",
-          "**Cloudflare (Turnstile):** يتحقق من أن عمليات التسجيل وتسجيل الدخول يقوم بها إنسان وليس برنامجًا آليًا. ويتلقى عنوان IP الخاص بك وتفاصيل تقنية عن متصفحك.",
-          "**Anthropic:** إنشاء المحتوى بالذكاء الاصطناعي وردود مساعد MABS على megmos.com.",
-          "**Shotstack:** يُنتج مقاطع الفيديو التي تنشئها في استوديو الفيديو من الصور والمقاطع والنصوص التي تختارها.",
-          "**ElevenLabs:** يحوّل جمل التعليق الصوتي التي تكتبها في استوديو الفيديو إلى كلام، عندما تختار تعليقًا صوتيًا.",
-          "**Vercel:** استضافة megmos.com وتطبيق MABS.",
-          "**Google Fonts:** يقدّم الخطوط على megmos.com ويتلقى عنوان IP الخاص بك عند تحميل الصفحة.",
-          "**Stripe:** معالجة المدفوعات، فقط بعد إطلاق الباقات المدفوعة.",
-        ]],
-        ["p", "قد نفصح عن البيانات أيضًا إذا اقتضى القانون ذلك، أو لحماية حقوقنا أو سلامة المستخدمين، أو في إطار بيع أعمالنا أو إعادة تنظيمها. وفي هذه الحالة سنبلغك قبل أن تخضع بياناتك لسياسة خصوصية مختلفة."],
-        ["h2", "6. نقل البيانات دوليًا"],
-        ["p", "مقرّنا في الولايات المتحدة، وقد يعالج مزوّدونا البيانات في الولايات المتحدة ودول أخرى. وحيث ينطبق قانون الاتحاد الأوروبي أو المملكة المتحدة، نعتمد على قرارات الكفاية (مثل إطار خصوصية البيانات بين الاتحاد الأوروبي والولايات المتحدة، إذا كان المزوّد معتمدًا) أو البنود التعاقدية القياسية للمفوضية الأوروبية."],
-        ["h2", "7. مدة الاحتفاظ"],
-        ["ul", [
-          "**بيانات الحساب وسياق العلامة والمشاريع والمحتوى المحفوظ:** نحتفظ بها ما دام حسابك مفتوحًا. وبعد حذف الحساب، نحذف هذه البيانات خلال 30 يومًا، إلا إذا كان الاحتفاظ مطلوبًا قانونًا أو مسموحًا به بموجب القانون المعمول به.",
-          "**النسخ الاحتياطية:** تُزال النسخ الاحتياطية التي تتضمن بيانات محذوفة ضمن دورة الاحتفاظ بالنسخ الاحتياطية خلال 30 يومًا إضافية، مع مراعاة القيود التقنية والمتطلبات القانونية.",
-          "**سجلات الاستخدام:** نحتفظ بها لمدة تصل إلى 24 شهرًا لإدارة حدود الاستخدام والأمان ومنع إساءة الاستخدام وحل المشكلات.",
-          "**سجلات الاستضافة:** وفق إعدادات الاحتفاظ لدى مزوّد الاستضافة، وتتراوح عادةً بين أيام وأسابيع.",
-          "**رسائل الدعم:** نحتفظ بها لمدة تصل إلى 24 شهرًا بعد انتهاء المحادثة، ما لم يتطلب القانون أو يبرر مدة مختلفة.",
-        ]],
-        ["p", "قد يحتفظ مزوّدو خدماتنا بالمعلومات وفق شروطهم التعاقدية وسياسات الاحتفاظ الخاصة بهم."],
-        ["h2", "8. حقوقك"],
-        ["p", "بحسب مكان إقامتك، يمكنك طلب **الاطلاع** على بياناتك الشخصية أو **تصحيحها** أو **حذفها** أو **تصديرها**، و**الاعتراض** على بعض المعالجة أو **تقييدها**، و**سحب موافقتك** في أي وقت. ويتمتع سكان كاليفورنيا وغيرها من الولايات الأمريكية التي لديها قوانين خصوصية بحقوق مماثلة، ولن نعاملك بشكل مختلف لممارستك لها."],
-        ["p", `لممارسة هذه الحقوق، راسل **${PRIVACY}**. ويمكنك أيضًا إرسال طلب تصدير أو حذف من الإعدادات ← الخصوصية في MABS. تُعالَج هذه الطلبات يدويًا حاليًا. نرد خلال شهر واحد، أو خلال المهلة التي يحددها قانونك. وفي الاتحاد الأوروبي أو المملكة المتحدة يمكنك أيضًا تقديم شكوى إلى سلطة حماية البيانات المحلية.`],
-        ["h2", "9. الأمان"],
-        ["p", "نستخدم اتصالات مشفّرة (HTTPS) وضوابط وصول ومزوّدين لديهم برامج أمان معترف بها. لا يوجد نظام آمن تمامًا. وإذا تأثرت بياناتك باختراق، فسنبلغك ونبلغ الجهات المختصة وفق ما يقتضيه القانون."],
-        ["h2", "10. الأطفال"],
-        ["p", "MABS أداة مهنية للبالغين، وليس موجهًا لمن هم دون 18 عامًا، ولا نجمع بيانات الأطفال عن علم."],
-        ["h2", "11. التغييرات"],
-        ["p", "سننشر أي تحديث هنا بتاريخ جديد. وإذا كان التغيير جوهريًا، فسنبلغ المستخدمين المسجلين أيضًا قبل سريانه."],
-      ],
-    },
+    privacy: privacyAr,
     terms: termsAr,
-    cookies: {
-      slug: "cookies", title: "سياسة ملفات تعريف الارتباط",
-      desc: "ملفات تعريف الارتباط والتقنيات المشابهة المستخدمة على megmos.com وفي MABS، ودور كل منها، وكيف تدير تفضيلاتك في أي وقت.",
-      blocks: [
-        ["p", "توضح هذه السياسة ملفات تعريف الارتباط (الكوكيز) والتقنيات المشابهة المستخدمة على **megmos.com** وفي **تطبيق MABS** (mabs.megmos.com). ملف تعريف الارتباط ملف صغير يحفظه الموقع في متصفحك، و«التخزين المحلي» وسيلة حفظ مشابهة تبقى على جهازك."],
-        ["h2", "megmos.com"],
-        ["p", "**لا يضع megmos.com أي ملفات تعريف ارتباط.** ولا يستخدم أي أدوات تحليل أو إعلان أو تتبع."],
-        ["p", "إذا استخدمت محادثة مساعد MABS، تُحفظ المحادثة في التخزين المؤقت للجلسة في متصفحك (mabs_chat_en أو mabs_chat_ar) لتبقى مفتوحة أثناء تنقلك بين الصفحات، وتُحذف عند إغلاق علامة التبويب أو عند النقر على «محادثة جديدة»."],
-        ["p", "لعرض الخطوط، يحمّل الموقع الخطوط من **Google Fonts**، لذا يتصل متصفحك بخوادم Google التي تتلقى عنوان IP الخاص بك. راجع سياسة خصوصية Google لمعرفة كيفية تعاملها مع ذلك."],
-        ["h2", "تطبيق MABS"],
-        ["p", "نستخدم فقط ما يحتاجه MABS للعمل وتذكّر اختياراتك:"],
-        ["table", ["الاسم", "النوع", "الغرض", "المدة", "الفئة"], [
-          ["sb-…-auth-token", "ملف تعريف ارتباط (Supabase)", "يبقيك مسجلًا للدخول بأمان (قد يُقسَّم إلى أجزاء مرقّمة)", "حتى تسجيل الخروج أو انتهاء الجلسة", "ضروري تمامًا"],
-          ["MABS_LOCALE", "ملف تعريف ارتباط", "يتذكر لغتك (العربية أو الإنجليزية)", "سنة واحدة", "وظيفي"],
-          ["mabs_cookie_prefs", "تخزين محلي", "يتذكر اختياراتك بشأن ملفات تعريف الارتباط", "حتى تحذفه", "ضروري تمامًا"],
-          ["mabs_invite", "ملف تعريف ارتباط", "يحتفظ بدعوة التجربة الشخصية أثناء التسجيل، ثم يُحذف", "حتى 7 أيام", "ضروري تمامًا"],
-        ]],
-        ["p", "في صفحتي التسجيل وتسجيل الدخول، يتحقق **Cloudflare Turnstile** من أنك إنسان وليس برنامجًا آليًا. ويعمل هذا التحقق داخل إطار من Cloudflare (challenges.cloudflare.com) وتخضع معالجته لسياسة الخصوصية الخاصة بـ Cloudflare."],
-        ["p", "لا يمكن إيقاف العناصر الضرورية تمامًا لأن التطبيق لا يعمل بدونها. **لا نستخدم حاليًا ملفات تعريف ارتباط للتحليل أو الإعلان أو التسويق.** وإذا أضفنا أيًا منها، فسنحدّث هذه السياسة ونطلب موافقتك أولًا حيث يقتضي القانون ذلك."],
-        ["h2", "اختياراتك"],
-        ["ul", [
-          "أدِر تفضيلاتك في MABS من **الإعدادات ← الخصوصية ← تفضيلات ملفات تعريف الارتباط**.",
-          "يمكنك أيضًا حظر ملفات تعريف الارتباط أو حذفها من إعدادات متصفحك. وإذا حظرت ملف تسجيل الدخول، فلن تتمكن من استخدام MABS.",
-        ]],
-        ["h2", "التواصل"],
-        ["p", `للاستفسارات: **${PRIVACY}**`],
-      ],
-    },
+    cookies: cookiesAr,
   },
 };

@@ -201,7 +201,7 @@ ${headerHtml(t, other)}
     <a class="text-link back" href="${t.path}">${icon("arrow", 16, "back-ic")} ${esc(L.labels.back)}</a>
     <p class="eyebrow">${esc(L.labels.legal)}</p>
     <h1>${esc(doc.title)}</h1>
-    <p class="legal-date">${esc(L.labels.updated)}: ${esc((doc.updated || LEGAL_UPDATED)[t.lang])}</p>
+    <p class="legal-date">${esc(L.labels.updated)}: ${esc(LEGAL_UPDATED[t.lang])}</p>
     ${L.labels.prevails ? `<p class="legal-note">${esc(L.labels.prevails)}</p>` : ""}
     <article class="legal-body">
       ${legalBody(doc.blocks)}
