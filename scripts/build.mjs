@@ -33,6 +33,8 @@ const P = {
   copy: '<rect x="8" y="8" width="12" height="12" rx="1.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/>',
   menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
   flyer: '<rect x="5" y="3" width="14" height="18" rx="1"/><path d="M5 12h14"/><path d="m8 9 2.5-2.5L13 9l1.5-1.5L16 9"/><path d="M8 15h8M8 18h5"/>',
+  image: '<rect x="3" y="4.5" width="18" height="15" rx="1.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="m3.5 17 5-4.5 4 3.5 3-2.5 5 4"/>',
+  storefront: '<rect x="3.5" y="4.5" width="17" height="15" rx="1.5"/><path d="M3.5 8.5h17M7 12h5M7 15h3.5M14.5 12h3v4h-3z"/>',
   palette: '<path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.6-.9 1.2-1.8-.5-1 .2-2.2 1.3-2.2H17a4 4 0 0 0 4-4c0-5.5-4-10-9-10z"/><circle cx="7.5" cy="11.5" r="1"/><circle cx="10.5" cy="7.5" r="1"/><circle cx="15" cy="8" r="1"/>',
 };
 const icon = (name, size = 20, cls = "") =>
@@ -43,7 +45,7 @@ const LOGIN = `${APP}/login`;
 
 /* ---------- product mockups (HTML/CSS, replaceable with real screenshots) ---------- */
 
-function appSidebar(t, active = 0) {
+function appSidebar(t, active = 1) { // 1 = AI Content
   return `<div class="app-side" aria-hidden="true">
       <div class="app-logo"><img src="/logo.png" alt="" width="28" height="28"><span>MABS</span></div>
       ${t.app.navItems.map((n, i) => `<div class="app-nav${i === active ? " on" : ""}">${esc(n)}</div>`).join("")}
@@ -95,6 +97,9 @@ function featurePreview(t, kind) {
     case "web": return `<div class="pv pv-tags">${pv.web.map((s) => `<span>${esc(s)}</span>`).join("")}</div>`;
     case "design": return `<div class="pv pv-tags">${pv.design.map((s, i) => `<span class="${i === 0 ? "on" : ""}">${esc(s)}</span>`).join("")}</div>`;
     case "brand": return `<div class="pv pv-swatch"><i></i><i></i><i></i><i></i><div class="pv-tags">${pv.brand.map((s) => `<span>${esc(s)}</span>`).join("")}</div></div>`;
+    case "videoStudio":
+    case "imageStudio":
+    case "websiteService": return `<div class="pv pv-tags">${pv[kind].map((s, i) => `<span class="${i === 0 ? "on" : ""}">${esc(s)}</span>`).join("")}</div>`;
     case "lang": return `<div class="pv pv-lang"><span dir="ltr" lang="en">${esc(pv.langEn)}</span><span dir="rtl" lang="ar">${esc(pv.langAr)}</span></div>`;
     default: return "";
   }
@@ -108,7 +113,7 @@ function demoPanels(t) {
     </div>`;
   const field = ([l, v], wide = false, badge = "") => `<div class="f${wide ? " wide" : ""}"><label>${esc(l)}${badge ? ` <span class="badge">${esc(badge)}</span>` : ""}</label><div class="in">${esc(v)}</div></div>`;
   const panel2 = `<div class="app">
-      ${appSidebar(t, 1)}
+      ${appSidebar(t)}
       <div class="app-main">
         <div class="app-title">${icon("home", 18)} ${esc(f.title)}</div>
         <div class="form">
@@ -122,7 +127,7 @@ function demoPanels(t) {
       </div>
     </div>`;
   const panel3 = `<div class="app">
-      ${appSidebar(t, 1)}
+      ${appSidebar(t)}
       <div class="app-main">${outputCard(t)}</div>
     </div>`;
   return [panel1, panel2, panel3];
@@ -905,7 +910,7 @@ ${headerHtml(t, t.other)}
     <div class="grid g4 features">
       ${t.features.cards.map((c) => `<article class="card feature reveal">
         <div class="feature-top">${icon(c.icon, 20, "tile")}<h3>${esc(c.name)}</h3></div>
-        <span class="plan-tag${c.plan === "pro" ? " pro" : ""}">${esc(t.features.plans[c.plan])}</span>
+        <span class="plan-tag${c.plan === "pro" || c.plan === "elite" || c.plan === "service" ? " pro" : ""}">${esc(t.features.plans[c.plan])}</span>
         <p>${esc(c.desc)}</p>
         <div class="feature-pv" aria-hidden="true">${featurePreview(t, c.preview)}</div>
       </article>`).join("\n      ")}
